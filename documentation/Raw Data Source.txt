@@ -1,0 +1,14 @@
+Symbol Lists
+ftp://ftp.nasdaqtrader.com/SymbolDirectory/nasdaqlisted.txt
+ftp://ftp.nasdaqtrader.com/SymbolDirectory/otherlisted.txt
+Field Descriptions: http://www.nasdaqtrader.com/trader.aspx?id=symboldirdefs
+
+
+Financials
+  Earnings: Key Stats -> EBITDA * 1000
+  NetWorkingCapital: Key Stats -> Total Cash * 1000
+  NetFixedAssets: Balance Sheet -> (Long Term + PPE) / 1000
+  TotalEquity: Balance Sheet -> Stockholder Equity / 1000
+  TotalAssets: Balance Sheet -> Total Assets / 1000
+  Enterprise Value: Key Stats -> Enterprise Value (* 1000 if end in 'B')
+  EPS: Summary -> EPS

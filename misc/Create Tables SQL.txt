@@ -1,0 +1,113 @@
+CREATE TABLE Company (
+  Id INT(11) NOT NULL AUTO_INCREMENT,
+  Symbol VARCHAR(10) NOT NULL,
+  CompanyName VARCHAR(100) NOT NULL,
+  AverageDailyVolume INT(10) UNSIGNED,
+  DayChange FLOAT,
+  DaysLow FLOAT,
+  DaysHigh FLOAT,
+  YearLow FLOAT,
+  YearHigh FLOAT,
+  MarketCapitalization VARCHAR(10),
+  LastTradePriceOnly FLOAT,
+  Volume INT(11),
+  StockExchange CHAR(3),  
+  LastUpdated DATE,
+  Active TINYINT(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY(id)
+);
+
+CREATE INDEX idx_CompanySymbol ON Company (Symbol(4));
+
+CREATE INDEX idx_CompanyName ON Company (CompanyName(10));
+
+CREATE TABLE Financials (
+  Id INT(11) NOT NULL AUTO_INCREMENT,
+  CompanyId INT(11) NOT NULL,
+  YearEnding SMALLINT(6) NOT NULL,
+  Earnings FLOAT,
+  NetWorkingCapital FLOAT,
+  NetFixedAssets FLOAT,
+  TotalEquity FLOAT,
+  TotalAssets FLOAT,
+  LastUpdated DATE,
+  PRIMARY KEY(id),
+  FOREIGN KEY (CompanyId) REFERENCES Company(Id)
+);
+
+CREATE INDEX idx_FinancialsYearEnding ON Financials (YearEnding);
+
+CREATE TABLE User (
+  Id INT(11) NOT NULL AUTO_INCREMENT,
+  Username VARCHAR(50) NOT NULL,
+  HashedPassword VARCHAR(60) NOT NULL,
+  FirstName VARCHAR(100),
+  LastName VARCHAR(100),
+  Email VARCHAR(254) NOT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE INDEX idx_UserName ON User (Username(15));
+
+CREATE TABLE Symbol (
+  Symbol CHAR(5) NOT NULL,
+  SecurityName NVARCHAR(50),
+  MarketCategory CHAR(1),
+  TestIssue CHAR(1),
+  FinancialStatus CHAR(1),
+  RoundLot INT(11),
+  PRIMARY KEY (Symbol)
+);
+
+CREATE TABLE Transaction (
+  Id INT(11) NOT NULL AUTO_INCREMENT,
+  CompanyId INT(11) NOT NULL,
+  UserId INT(11) NOT NULL,
+  TransactionType TinyInt NOT NULL,
+  TransactionDate DATE,
+  Shares FLOAT DEFAULT 0,
+  Price FLOAT DEFAULT 0,
+  Commission FLOAT,
+  Notes VARCHAR(254),
+  PRIMARY KEY(id),
+  FOREIGN KEY (CompanyId) REFERENCES Company(Id)
+);
+
+CREATE INDEX idx_TransactionUser ON Transaction(UserId);
+
+CREATE TABLE WatchList (
+  Id INT(11) NOT NULL AUTO_INCREMENT,
+  UserId INT(11) NOT NULL,
+  WatchListName VARCHAR(50),
+  PRIMARY KEY (Id),
+  FOREIGN KEY (UserId) REFERENCES User(Id)
+);
+
+CREATE INDEX idx_WatchListUser ON WatchList(UserId);
+
+CREATE TABLE WatchListItems (
+  Id INT(11) NOT NULL AUTO_INCREMENT,
+  WatchListId INT(11) NOT NULL,
+  CompanyId INT(11) NOT NULL,
+  Notes VARCHAR(254),
+  PRIMARY KEY (Id),
+  FOREIGN KEY (WatchListId) REFERENCES WatchList(Id)
+);
+
+CREATE INDEX idx_WatchListId ON WatchListItems(WatchListId);
+
+CREATE TABLE History (
+  Id INT(11) NOT NULL AUTO_INCREMENT,
+  CompanyId INT(11) NOT NULL,
+  HistoryDate date NOT NULL,
+  Open FLOAT DEFAULT 0,
+  High FLOAT DEFAULT 0,
+  Low FLOAT DEFAULT 0,
+  Close FLOAT DEFAULT 0,
+  Volume INT(11) DEFAULT 0,
+  AdjustedClose FLOAT DEFAULT 0,
+  PRIMARY KEY (Id),
+  FOREIGN KEY (CompanyId) REFERENCES Company(Id)
+);
+
+CREATE INDEX idx_HistoryDate ON History(HistoryDate);

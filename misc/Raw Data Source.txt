@@ -1,0 +1,4 @@
+Symbol Lists
+ftp://ftp.nasdaqtrader.com/SymbolDirectory/nasdaqlisted.txt
+ftp://ftp.nasdaqtrader.com/SymbolDirectory/otherlisted.txt
+Field Descriptions: http://www.nasdaqtrader.com/trader.aspx?id=symboldirdefs
