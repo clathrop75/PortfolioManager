@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2015 at 09:46 PM
+-- Generation Time: Nov 16, 2015 at 08:39 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -33,7 +33,17 @@ CREATE TABLE IF NOT EXISTS `watchlistitems` (
   `Notes` varchar(254) DEFAULT NULL,
   PRIMARY KEY (`Id`),
   KEY `idx_WatchListId` (`WatchListId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `watchlistitems`
+--
+
+INSERT INTO `watchlistitems` (`Id`, `WatchListId`, `CompanyId`, `Notes`) VALUES
+(1, 1, 5, 'Some notes about Amazon'),
+(2, 1, 6, 'Some notes about LinkedIn'),
+(3, 1, 7, 'Some notes about Twitter'),
+(4, 1, 8, 'Some notes about EMC');
 
 --
 -- Constraints for dumped tables

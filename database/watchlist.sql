@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2015 at 09:46 PM
+-- Generation Time: Nov 16, 2015 at 08:39 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -32,7 +32,14 @@ CREATE TABLE IF NOT EXISTS `watchlist` (
   `WatchListName` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`Id`),
   KEY `idx_WatchListUser` (`UserId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `watchlist`
+--
+
+INSERT INTO `watchlist` (`Id`, `UserId`, `WatchListName`) VALUES
+(1, 1, 'Tech Stocks');
 
 --
 -- Constraints for dumped tables
