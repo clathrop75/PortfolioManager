@@ -1,0 +1,184 @@
+{
+	"transaction": [
+		{
+			"companyName": "Microsoft Corporation",
+			"symbol": "MSFT",
+			"type": "Buy",
+			"date": "2011-04-15",
+			"shares": "39.417",
+			"price": "25.37",
+			"commission": "",
+			"notes": ""
+		},
+		{
+			"companyName": "Alphabet Inc.",
+			"symbol": "GOOG",
+			"type": "Buy",
+			"date": "2011-06-15",
+			"shares": "20.638",
+			"price": "242.27",
+			"commission": "",
+			"notes": ""
+		},
+		{
+			"companyName": "Apple Inc.",
+			"symbol": "AAPL",
+			"type": "Buy",
+			"date": "2011-11-04",
+			"shares": "43.722",
+			"price": "57.18",
+			"commission": "",
+			"notes": ""
+		},
+		{
+			"companyName": "Microsoft Corporation",
+			"symbol": "MSFT",
+			"type": "Sell",
+			"date": "2012-04-28",
+			"shares": "39.417",
+			"price": "31.98",
+			"commission": "",
+			"notes": ""
+		},
+		{
+			"companyName": "Yahoo! Inc.",
+			"symbol": "YHOO",
+			"type": "Buy",
+			"date": "2012-07-02",
+			"shares": "67.024",
+			"price": "14.92",
+			"commission": "",
+			"notes": ""
+		},
+		{
+			"companyName": "Alphabet Inc.",
+			"symbol": "GOOG",
+			"type": "Buy",
+			"date": "2012-08-17",
+			"shares": "14.783",
+			"price": "338.23",
+			"commission": "",
+			"notes": ""
+		},
+		{
+			"companyName": "Apple Inc.",
+			"symbol": "AAPL",
+			"type": "Sell",
+			"date": "2012-09-21",
+			"shares": "25",
+			"price": "100.04",
+			"commission": "",
+			"notes": ""
+		},
+		{
+			"companyName": "Microsoft Corporation",
+			"symbol": "MSFT",
+			"type": "Buy",
+			"date": "2013-02-03",
+			"shares": "35.804",
+			"price": "27.93",
+			"commission": "",
+			"notes": ""
+		},
+		{
+			"companyName": "Yahoo! Inc.",
+			"symbol": "YHOO",
+			"type": "Buy",
+			"date": "2013-03-01",
+			"shares": "45.579",
+			"price": "21.94",
+			"commission": "",
+			"notes": ""
+		},
+		{
+			"companyName": "Apple Inc.",
+			"symbol": "AAPL",
+			"type": "Buy",
+			"date": "2013-03-15",
+			"shares": "39.445",
+			"price": "63.38",
+			"commission": "",
+			"notes": ""
+		},
+		{
+			"companyName": "Alphabet Inc.",
+			"symbol": "GOOG",
+			"type": "Buy",
+			"date": "2014-06-20",
+			"shares": "8.987",
+			"price": "556.36",
+			"commission": "",
+			"notes": ""
+		},
+		{
+			"companyName": "Apple Inc.",
+			"symbol": "AAPL",
+			"type": "Buy",
+			"date": "2014-08-22",
+			"shares": "24.674",
+			"price": "101.32",
+			"commission": "",
+			"notes": ""
+		},
+		{
+			"companyName": "Microsoft Corporation",
+			"symbol": "MSFT",
+			"type": "Buy",
+			"date": "2014-08-22",
+			"shares": "33.223",
+			"price": "45.15",
+			"commission": "",
+			"notes": ""
+		},
+		{
+			"companyName": "Yahoo! Inc.",
+			"symbol": "YHOO",
+			"type": "Sell",
+			"date": "2014-11-28",
+			"shares": "25",
+			"price": "51.47",
+			"commission": "",
+			"notes": ""
+		},
+		{
+			"companyName": "Alphabet Inc.",
+			"symbol": "GOOG",
+			"type": "Sell",
+			"date": "2015-05-25",
+			"shares": "39.408",
+			"price": "532.11",
+			"commission": "",
+			"notes": ""
+		},
+		{
+			"companyName": "Yahoo! Inc.",
+			"symbol": "YHOO",
+			"type": "Buy",
+			"date": "2015-09-04",
+			"shares": "31.666",
+			"price": "31.58",
+			"commission": "",
+			"notes": ""
+		},
+		{
+			"companyName": "Apple Inc.",
+			"symbol": "AAPL",
+			"type": "Sell",
+			"date": "2015-09-25",
+			"shares": "75",
+			"price": "114.71",
+			"commission": "",
+			"notes": ""
+		},
+		{
+			"companyName": "Microsoft Corporation",
+			"symbol": "MSFT",
+			"type": "Sell",
+			"date": "2015-10-23",
+			"shares": "50",
+			"price": "52.87",
+			"commission": "",
+			"notes": ""
+		}
+	]
+}

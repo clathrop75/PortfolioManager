@@ -1,0 +1,46 @@
+{
+	"portfolio": {
+		"stockSummary": [
+			{
+				"companyName": "Yahoo! Inc.",
+				"symbol": "YHOO",
+				"lastTradePriceOnly": "32.19",
+				"shares": "119.269",
+				"costBasis": "2627.01",
+				"marketValue": "3839.27",
+				"gain": "1212.26",
+				"return": "46.15"
+			},
+			{
+				"companyName": "Apple Inc.",
+				"symbol": "AAPL",
+				"lastTradePriceOnly": "112.34",
+				"shares": "7.841",
+				"costBasis": "794.45",
+				"marketValue": "880.86",
+				"gain": "86.41",
+				"return": "10.88"
+			},
+			{
+				"companyName": "Alphabet Inc.",
+				"symbol": "GOOG",
+				"lastTradePriceOnly": "717",
+				"shares": "5",
+				"costBasis": "2781.8",
+				"marketValue": "3585",
+				"gain": "803.2",
+				"return": "28.87"
+			},
+			{
+				"companyName": "Microsoft Corporation",
+				"symbol": "MSFT",
+				"lastTradePriceOnly": "52.84",
+				"shares": "19.027",
+				"costBasis": "859.07",
+				"marketValue": "1005.39",
+				"gain": "146.32",
+				"return": "17.03"
+			}
+		]
+	}
+}
