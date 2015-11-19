@@ -11,7 +11,7 @@ $router->get['/user'] = function(){
     header('Content-type: application/json');
     header("Access-Control-Allow-Origin: *");
     print json_encode($user);
-    exit;
+    exit();
 };
 
 $router->get['/home/#id'] = function($req){

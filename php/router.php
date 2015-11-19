@@ -36,12 +36,16 @@ class router
         $urlEnd = explode('/', $baseUrl);
         $urlEnd = end($urlEnd);
 
-        $requestInfo = 0;
+        if($baseUrl == '/'){
+            readfile('./webroot/home.html');
+            exit();
+        }
+
+        $requestInfo = array();
         if($this->isId($urlEnd)){
             $baseUrl = substr($baseUrl, 0, strpos($baseUrl, $urlEnd)) . '#id';
             $requestInfo['id'] = $urlEnd;
         }
-
 
         switch($method){
             case "GET":
