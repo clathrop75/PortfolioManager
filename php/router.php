@@ -33,8 +33,10 @@ class router
     {
         $method = $_SERVER['REQUEST_METHOD'];
         $baseUrl = $this->getCurrentUri();
-        $urlEnd = end(explode('/', $baseUrl));
+        $urlEnd = explode('/', $baseUrl);
+        $urlEnd = end($urlEnd);
 
+        $requestInfo = 0;
         if($this->isId($urlEnd)){
             $baseUrl = substr($baseUrl, 0, strpos($baseUrl, $urlEnd)) . '#id';
             $requestInfo['id'] = $urlEnd;
