@@ -7,7 +7,7 @@ class router
     public $put = array();
     public $delete = array();
 
-    function isId($string){
+    private function isId($string){
         if (ctype_digit($string)) {
             return true;
         } else {
@@ -15,7 +15,7 @@ class router
         }
     }
 
-    function getCurrentUri()
+    private function getCurrentUri()
     {
         $basepath = implode('/', array_slice(explode('/', $_SERVER['SCRIPT_NAME']), 0, -1)) . '/';
         $uri = substr($_SERVER['REQUEST_URI'], strlen($basepath));
@@ -24,7 +24,7 @@ class router
         return $uri;
     }
 
-    function error($url){
+    private function error($url){
         header("HTTP/1.0 400 Bad Request");
         print("Did not understand URL");
     }
