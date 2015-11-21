@@ -1,0 +1,8 @@
+{
+	"login": {
+		"operation": "failure",
+		"user": {
+			"username": "testperson"
+		}
+	}
+}
