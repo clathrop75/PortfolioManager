@@ -1,62 +1,16 @@
 #Description of Stored Procedures
 Following is a listing of the Stored Procedures in the database, what their purpose is and guidelines on usage.
 
-##User Stored Procedures
-###spInsertUser
-This proc inserts a new user into the database after they have registered. It takes the FirstName, LastName, Email, Username and HashedPassword as parameters in that order. It returns the Id of the inserted row if successful or 0 if unsuccessful. Two common cases for a 0 return would be if either the Username or Email already exists in the table. However, technically, in order to meet the assignment's requirements these two values should be validated as unique in the UI (using AJAX) prior to attempting to insert the new user.
-
-###spValidateUser
-This proc validates the user's credentials during the logon. It takes the Username and HashedPassword as parameters. If successful it returns the Username, FirstName and LastName. If unsuccessful, it returns a 0.
-
-###spGetUserExistsByUsername
-This proc is used during the user registration process to check whether or not the supplied Username is already in use. If the Username already exists it returns a 1, if not, it returns a 0.
-
-###spGetUserExistsByEmail
-This proc is used during the user registration process to check whether or not the supplied Email is already in use. If the Email already exists it returns a 1, if not, it returns a 0.
-
-##WatchList Stored Procedures
-###spInsertWatchList
-This proc inserts a new WatchList for a user. It takes the Username and WatchListName as parameters. If successful, it returns the Id of the WatchList. If unsuccessful, it returns a 0.
-
-###spUpdateWatchList
-
-###spDeleteWatchList
-
-###spGetWatchListById
-
-###spGetWatchLists
-
-##WatchListItems Stored Procedures
-###spInsertWatchListItem
-
-###spUpdateWatchListItem
-
-###spDeleteWatchListItem
-
-###spGetWatchListItemsById
-
-###spGetWatchListItems
-
 ##Transaction Stored Procedures
-###spInsertTransaction
+###spGetPortfolioSummary
+This proc addresses the rather nasty problem of rolling up transactions into a concise portfolio view. The problem with this largely has to do with the calculation of the cost basis for a particular stock. The cost basis is how much it cost an investor to purchase the currently held amount of a particular stock. Within this calculation, any sales of stock have to be deducted from purchases on a First In-First Out (FIFO) basis. As such, the transactions simply cannot be summed. Instead each sale has to be deducted from the first buy order until that first order is expended. Then the sales order(s) move on consuming the second buy order until that is expended and so on until all sales have been deducted. From there, the total price of each remaining buy order are calculated and then aggregated to calculate the cost basis. While this could be handled at a different layer of the web app, doing so may result in a much larger transfer of data than necessary (or desirable) for users with larger and more active portfolios.
 
-###spUpdateTransaction
-
-###spDeleteTransaction
-
-###spGetTransactionById
+The proc takes a Username as an input and returns the a list of aggregations comprising the Company Name, Ticker Symbol, Last Trade Price, Total Shares, Cost Basis, Market Value, Total Gain and Return Percentage. These values are returned as floats and, therefore, will need to be appropriately handled in the UI. Total Shares should be left as is and Return Percentage just needs to have a '%' appended to it. The other numeric fields should be formatted as a currency and rounded to two decimals. If we can get it working so that Yahoo Finance data can be grabbed real-time from the browser (i.e. the last trade price), then this will be changed and the Market Value, Total Gain and Return Percentage will have to b calculated in the front-end.
 
 ###spGetTransactionsPaged
 
-###spGetTransactionsSummaryBySymbol
-
 ##Company Stored Procedures
-###spGetCompanyById
-
-###spGetCompanyBySymbol
-
-## Company History Stored Procedures
-###spGetHistoryRange
+###spGetCompanyHistoryRange
 
 ## Company Financials Stored Procedures
-###spGetFinacialsLatest
+###spGetCompanyFinacialsLatest
