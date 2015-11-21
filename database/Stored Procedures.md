@@ -8,9 +8,4 @@ This proc addresses the rather nasty problem of rolling up transactions into a c
 The proc takes a Username as an input and returns the a list of aggregations comprising the Company Name, Ticker Symbol, Last Trade Price, Total Shares, Cost Basis, Market Value, Total Gain and Return Percentage. These values are returned as floats and, therefore, will need to be appropriately handled in the UI. Total Shares should be left as is and Return Percentage just needs to have a '%' appended to it. The other numeric fields should be formatted as a currency and rounded to two decimals. If we can get it working so that Yahoo Finance data can be grabbed real-time from the browser (i.e. the last trade price), then this will be changed and the Market Value, Total Gain and Return Percentage will have to b calculated in the front-end.
 
 ###spGetTransactionsPaged
-
-##Company Stored Procedures
-###spGetCompanyHistoryRange
-
-## Company Financials Stored Procedures
-###spGetCompanyFinacialsLatest
+This proc avoids the issue of sending back all transactions for a particular user. The UI should use a paged interface for the grid rather than displaying all transactions as one time. So the UI makes a request to the API providing the page number, page size and user. The API then invokes the ORM which in turn calls this proc. It takes the username, page size and page number as parameters and returns the Company Name, Symbol, Transaction Type (0 = Sell, 1 = Buy), Transaction Date, Number of Shares, Price Per Share, Commission Amount and Notes.
