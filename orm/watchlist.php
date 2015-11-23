@@ -17,7 +17,7 @@ class watchList{
 
     public static function create($userId, $watchListName){
         $db = new db;
-        $sanitizedArray = sanitize($userId, $watchListName);
+        $sanitizedArray = sanitize([$userId, $watchListName]);
         $result = $db->query("insert into WatchList values(0, '$sanitizedArray[0]', '$sanitizedArray[1]')");
         if($result){
             $watchList = self::getByUserIdWatchListName($userId, $watchListName);
@@ -40,7 +40,7 @@ class watchList{
 
     public static function getById($id){
         $db = new db;
-        $result = $db->query("select * from watchlist w where w.id = '$id'");
+        $result = $db->query("select * from watchlist w where w.Id = '$id'");
 
         if($result->num_rows == 0){
             return 0;
@@ -79,7 +79,7 @@ class watchList{
     }
 
     public function setWatchListName($newName){
-        $sanitized = sanitize($newName);
+        $sanitized = sanitize([$newName]);
         $watchListName = $this->watchListName;
         $this->watchListName = $sanitized[0];
         $result = $this->update();
