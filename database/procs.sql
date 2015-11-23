@@ -89,4 +89,44 @@ BEGIN
 	
 END//
 
+CREATE PROCEDURE spInsertOrUpdateCompany(varSymbol VARCHAR(10),
+	varAverageDailyVolume INT(10) UNSIGNED,
+	varDayChange FLOAT,
+	varDaysLow FLOAT,
+	varDaysHigh FLOAT,
+	varYearLow FLOAT,
+	varYearHigh FLOAT,
+	varMarketCapitalization VARCHAR(10),
+	varLastTradePriceOnly FLOAT,
+	varCompanyName VARCHAR(100),
+	varVolume INT(11),
+	varStockExchange CHAR(3),
+	varLastUpdated DATE)
+BEGIN
+	DECLARE varCompanyId INT;
+	
+	SELECT c.Id INTO varCompanyId FROM Company c WHERE c.Symbol=varSymbol;
+	
+	IF varCompanyId > 0 THEN
+		UPDATE Company SET
+			AverageDailyVolume=varAverageDailyVolume,
+			DayChange=varDayChange,
+			DaysLow=varDaysLow,
+			DaysHigh=varDaysHigh,
+			YearLow=varYearLow,
+			YearHigh=varYearHigh,
+			MarketCapitalization=varMarketCapitalization,
+			LastTradePriceOnly=varLastTradePriceOnly,
+			CompanyName=varCompanyName,
+			Volume=varVolume,
+			StockExchange=varStockExchange,
+			LastUpdated=varLastUpdated
+		WHERE Id=varCompanyId;
+	ELSE
+		INSERT INTO Company (Symbol, AverageDailyVolume, DayChange, DaysLow, DaysHigh, YearLow, YearHigh, MarketCapitalization, LastTradePriceOnly, CompanyName, Volume, StockExchange, LastUpdated, Active)
+		VALUES (varSymbol, varAverageDailyVolume, varDayChange, varDaysLow, varDaysHigh, varYearLow, varYearHigh, varMarketCapitalization, varLastTradePriceOnly, varCompanyName, varVolume, varStockExchange, varLastUpdated, 1);
+	END IF;
+	
+END//
+
 DELIMITER ;

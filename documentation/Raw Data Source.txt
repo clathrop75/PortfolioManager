@@ -12,3 +12,17 @@ Financials
   TotalAssets: Balance Sheet -> Total Assets / 1000
   Enterprise Value: Key Stats -> Enterprise Value (* 1000 if end in 'B')
   EPS: Summary -> EPS
+
+
+Market Capitalization
+  market cap = share price * # shares outstanding
+  Mega: 200B+
+  Large: 10B-200B
+  Mid: 2B-10B
+  Small: 300M-2B
+  Micro (Penny): 50M-300M
+  Nano: <50M
+
+
+YQL
+select * from yahoo.finance.historicaldata where symbol = "EMC" and startDate = "2015-11-01" and endDate = "2015-11-15"
