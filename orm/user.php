@@ -25,6 +25,18 @@ class user extends orm{
         return new user($result['Id'], $result['UserName'], $result['LastName'], $result['FirstName'], $result['Email']);
     }
 
+    public static function getByEmail($email){
+        $db = new db;
+        $result = $db->query("select s.Id, s.UserName, s.LastName, s.FirstName, s.Email from user s where s.Email ='$email'");
+
+        if($result->num_rows == 0){
+            return 0;
+        }
+        $result = $result->fetch_assoc();
+
+        return new user($result['Id'], $result['UserName'], $result['LastName'], $result['FirstName'], $result['Email']);
+    }
+
     public static function create($username, $lName, $fName, $email){
         $db = new db;
         $sanitizedArray = sanitize([$username, $lName, $fName, $email]);
@@ -41,7 +53,7 @@ class user extends orm{
     }
 
     public function getUserName(){
-        return $this->id;
+        return $this->username;
     }
 
     public function getLastName(){

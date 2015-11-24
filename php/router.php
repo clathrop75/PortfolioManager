@@ -2,6 +2,8 @@
 
 class router
 {
+    public $user;
+    public $auth = true;
     public $get = array();
     public $post = array();
     public $put = array();
@@ -29,7 +31,13 @@ class router
         print("Did not understand URL");
     }
 
-    function routeRequest()
+    public function authenticateRequest(){
+        if(isset($_COOKIE['loggedInEmail'])){
+            $this->user = user::getByEmail($_COOKIE['loggedInEmail']);
+        }
+    }
+
+    public function routeRequest()
     {
         $method = $_SERVER['REQUEST_METHOD'];
         $baseUrl = $this->getCurrentUri();
@@ -39,6 +47,23 @@ class router
         if($baseUrl == '/'){
             readfile('./webroot/home.html');
             exit();
+        }
+
+        if($this->auth && !$this->user){
+            if($method == 'POST' && $baseUrl == '/login') {
+                $user = user::getByEmail($_REQUEST['login']);
+                if($user){
+                    setcookie('loggedInEmail', $user->getEmail());
+                    readfile('./webroot/home.html');
+                    die();
+                }else{
+                    //redirect to error page with sign in or something else
+                    die();
+                }
+            }else{
+                readfile('./webroot/login.html');
+                die();
+            }
         }
 
         $requestInfo = array();
