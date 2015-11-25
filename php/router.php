@@ -33,6 +33,7 @@ class router {
     private function error($url){
         header("HTTP/1.0 400 Bad Request");
         print("Did not understand URL");
+        die();
     }
 
     private function login(){
@@ -42,7 +43,9 @@ class router {
 
     public function authenticateRequest(){
         if(isset($_COOKIE['portfolio_manager_auth_cookie'])){
-            $this->user = user::getByCookie($_COOKIE['portfolio_manager_auth_cookie']);
+            $user = user::getByCookie($_COOKIE['portfolio_manager_auth_cookie']);
+            if($user)
+                $this->user = $user;
         }
     }
 
@@ -88,22 +91,31 @@ class router {
 
             switch ($method) {
                 case "GET":
-                    if ($this->get[$baseUrl] != null) {
+                    if (isset($this->get[$baseUrl])) {
                         $this->get[$baseUrl]($requestInfo);
+                    }
+                    elseif(isset($this->bypass->get[$baseUrl])){
+                            $this->bypass->get[$baseUrl]();
                     } else {
                         $this->error($baseUrl);
                     }
                     break;
                 case "POST":
-                    if ($this->post[$baseUrl] != null) {
+                    if (isset($this->post[$baseUrl])) {
                         $this->post[$baseUrl]($requestInfo);
+                    }
+                    elseif(isset($this->bypass->post[$baseUrl])){
+                        $this->bypass->post[$baseUrl]();
                     } else {
                         $this->error($baseUrl);
                     }
                     break;
                 case "PUT":
-                    if ($this->put[$baseUrl] != null) {
+                    if (isset($this->put[$baseUrl])) {
                         $this->put[$baseUrl]($requestInfo);
+                    }
+                    elseif(isset($this->bypass->put[$baseUrl])){
+                        $this->bypass->put[$baseUrl]();
                     } else {
                         $this->error($baseUrl);
                     }

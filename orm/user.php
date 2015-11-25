@@ -22,29 +22,32 @@ class user extends orm{
         }
         $result = $result->fetch_assoc();
 
-        return new user($result['Id'], $result['UserName'], $result['LastName'], $result['FirstName'], $result['Email']);
+        return new user($result['Id'], $result['Username'], $result['LastName'], $result['FirstName'], $result['Email']);
     }
 
-    public function getUserAuth(){
+    public static function getByLogin($login){
         $db = new db;
-        $result = $db->query("select * from auth a where a.id ='$this->id'");
-
-        if($result->num_rows == 0){
-            return 0;
-        }
-        return $result->fetch_assoc();
-    }
-
-    public static function getByEmail($email){
-        $db = new db;
-        $result = $db->query("select s.Id, s.UserName, s.LastName, s.FirstName, s.Email from user s where s.Email ='$email'");
+        $result = $db->query("select * from user u where u.Email = '$login'");
 
         if($result->num_rows == 0){
             return 0;
         }
         $result = $result->fetch_assoc();
 
-        return new user($result['Id'], $result['UserName'], $result['LastName'], $result['FirstName'], $result['Email']);
+        return new user($result['Id'], $result['Username'], $result['LastName'], $result['FirstName'], $result['Email']);
+    }
+
+    public static function getByCookie($cookie){
+        $db = new db;
+        $time = time();
+        $result = $db->query("select * from auth a, user u where a.UserId = u.Id and a.authCookie = '$cookie' and '$time' < a.authCookieExp ");
+
+        if($result->num_rows == 0){
+            return 0;
+        }
+        $result = $result->fetch_assoc();
+
+        return new user($result['Id'], $result['Username'], $result['LastName'], $result['FirstName'], $result['Email']);
     }
 
     public static function create($username, $lName, $fName, $email){

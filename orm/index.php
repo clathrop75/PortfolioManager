@@ -16,6 +16,7 @@ abstract class orm{
         $field = $oldData;
         return $result;
     }
+
     abstract protected function update();
 
     public function getId(){
@@ -27,4 +28,5 @@ require 'user.php';
 require 'watchlist.php';
 require 'watchlistItem.php';
 require 'transaction.php';
+require 'auth.php';
 
