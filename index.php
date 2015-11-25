@@ -2,6 +2,7 @@
 
 require './php/db.php';
 require './php/util.php';
+require './php/bypass.php';
 require './php/router.php';
 $router = new router;
 

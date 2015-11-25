@@ -25,6 +25,16 @@ class user extends orm{
         return new user($result['Id'], $result['UserName'], $result['LastName'], $result['FirstName'], $result['Email']);
     }
 
+    public function getUserAuth(){
+        $db = new db;
+        $result = $db->query("select * from auth a where a.id ='$this->id'");
+
+        if($result->num_rows == 0){
+            return 0;
+        }
+        return $result->fetch_assoc();
+    }
+
     public static function getByEmail($email){
         $db = new db;
         $result = $db->query("select s.Id, s.UserName, s.LastName, s.FirstName, s.Email from user s where s.Email ='$email'");
