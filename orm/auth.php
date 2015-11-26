@@ -29,6 +29,25 @@ class auth extends orm{
         return new auth($result['Id'], $result['UserId'], $result['Pass'], $result['Salt'], $result['AuthCookie'], $result['AuthCookieExp']);
     }
 
+    public static function create($userId, $pass){
+        $db = new db;
+        $salt = uniqid(mt_rand(), true);
+
+        $options = [
+            'salt' => $salt
+        ];
+
+        $encrypted = password_hash($pass, PASSWORD_DEFAULT, $options);
+
+        $expiration = time()+ 3600 * 24 * 30;// set 30 day expiration
+        $cookie = md5($encrypted . $_SERVER['REMOTE_ADDR'] . $salt);
+        $try = $db->query("insert into auth values(0, '$userId', '$encrypted', '$salt', '$cookie', $expiration)");
+        if($try){
+            return [$cookie, $expiration];
+        }
+        return $try;
+    }
+
     protected function update(){
         $db = new db;
         return $db->query("update auth a set a.Pass='$this->pass', a.Salt='$this->salt', a.AuthCookie='$this->authCookie', a.AuthCookieExp='$this->authCookieExpiration' where a.Id = '$this->id'");

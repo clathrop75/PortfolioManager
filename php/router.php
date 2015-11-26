@@ -1,7 +1,6 @@
 <?php
 
 class router {
-    public $user;
     public $auth = true;
     public $get = array();
     public $post = array();
@@ -31,6 +30,7 @@ class router {
     }
 
     private function error($url){
+        //need to figure out error redirection
         header("HTTP/1.0 400 Bad Request");
         print("Did not understand URL");
         die();
@@ -45,7 +45,7 @@ class router {
         if(isset($_COOKIE['portfolio_manager_auth_cookie'])){
             $user = user::getByCookie($_COOKIE['portfolio_manager_auth_cookie']);
             if($user)
-                $this->user = $user;
+                $GLOBALS['USER'] = $user;
         }
     }
 
@@ -56,7 +56,7 @@ class router {
         $urlEnd = explode('/', $baseUrl);
         $urlEnd = end($urlEnd);
 
-        if (!$this->user && $this->auth) {
+        if (!isset($GLOBALS['USER']) && $this->auth) {
             switch ($method) {
                 case "GET":
                     if (isset($this->bypass->get[$baseUrl])) {

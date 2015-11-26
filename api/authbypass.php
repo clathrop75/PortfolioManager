@@ -44,3 +44,23 @@ $router->bypass->post['/login'] = function(){
         }
     }
 };
+
+$router->bypass->post['/signup'] = function(){
+    $try = user::create($_REQUEST['login'],  $_REQUEST['fname'], $_REQUEST['lname'], $_REQUEST['email']);
+    if(!$try){
+        // didnt work.. user likely already registered
+        header('HTTP/1.1 401 Unauthorized');
+        die();
+    }
+
+    $user = user::getByLogin($_REQUEST['email']);
+    $auth = auth::create($user->getId(), $_REQUEST['password']);
+
+    if(!$auth){
+        //failure, need to delete user that I just tried to put in
+    }
+    setcookie('portfolio_manager_auth_cookie', $auth[0], $auth[1]);
+    header('location: http://localhost:8888/watchlist');
+    die();
+
+};

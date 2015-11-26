@@ -25,6 +25,7 @@ class user extends orm{
         return new user($result['Id'], $result['Username'], $result['LastName'], $result['FirstName'], $result['Email']);
     }
 
+    //this is actually email. perhaps I need login as well?
     public static function getByLogin($login){
         $db = new db;
         $result = $db->query("select * from user u where u.Email = '$login'");
