@@ -17,3 +17,8 @@ $router->get['/user'] = function(){
 $router->get['/home/#id'] = function($req){
     echo  $req['id'];
 };
+
+$router->get['/watchlist'] = function(){
+    readfile('./webroot/watchlist.html');
+    die();
+};

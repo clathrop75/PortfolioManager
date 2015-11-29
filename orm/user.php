@@ -1,6 +1,5 @@
 <?php
-class user{
-    private $id;
+class user extends orm{
     private $username;
     private $lName;
     private $fName;
@@ -23,16 +22,42 @@ class user{
         }
         $result = $result->fetch_assoc();
 
-        return new user($result['Id'], $result['UserName'], $result['LastName'], $result['FirstName'], $result['Email']);
+        return new user($result['Id'], $result['Username'], $result['LastName'], $result['FirstName'], $result['Email']);
+    }
+
+    //this is actually email. perhaps I need login as well?
+    public static function getByLogin($login){
+        $db = new db;
+        $result = $db->query("select * from user u where u.Email = '$login'");
+
+        if($result->num_rows == 0){
+            return 0;
+        }
+        $result = $result->fetch_assoc();
+
+        return new user($result['Id'], $result['Username'], $result['LastName'], $result['FirstName'], $result['Email']);
+    }
+
+    public static function getByCookie($cookie){
+        $db = new db;
+        $time = time();
+        $result = $db->query("select * from auth a, user u where a.UserId = u.Id and a.authCookie = '$cookie' and '$time' < a.authCookieExp ");
+
+        if($result->num_rows == 0){
+            return 0;
+        }
+        $result = $result->fetch_assoc();
+
+        return new user($result['Id'], $result['Username'], $result['LastName'], $result['FirstName'], $result['Email']);
     }
 
     public static function create($username, $lName, $fName, $email){
         $db = new db;
-        $sanitzedArray = sanitize([$username, $lName, $fName, $email]);
-        return $db->query("insert into user (UserName, FirstName, LastName, Email) values('$sanitzedArray[0]', '$sanitzedArray[1]', '$sanitzedArray[2]', '$sanitzedArray[3]')");
+        $sanitizedArray = sanitize([$username, $lName, $fName, $email]);
+        return $db->query("insert into user (UserName, FirstName, LastName, Email) values('$sanitizedArray[0]', '$sanitizedArray[1]', '$sanitizedArray[2]', '$sanitizedArray[3]')");
     }
 
-    private function update(){
+    protected function update(){
         $db = new db;
         return $db->query("update user s set s.UserName='$this->username', s.LastName='$this->lName', s.FirstName='$this->fName', s.Email='$this->email' where s.Id = '$this->id'");
     }
@@ -42,7 +67,7 @@ class user{
     }
 
     public function getUserName(){
-        return $this->id;
+        return $this->username;
     }
 
     public function getLastName(){
@@ -58,58 +83,18 @@ class user{
     }
 
     public function setUserName($newName){
-        $sanitized = sanitize([$newName]);
-        $userName = $this->username;
-        $this->username = $sanitized[0];
-        $result = $this->update();
-
-        if($result){
-            return $result;
-        }
-
-        $this->username = $userName;
-        return $result;
+        return $this->updateHelper($newName, $this->fName);
     }
 
     public function setLastName($newLName){
-        $sanitized = sanitize([$newLName]);
-        $lastName = $this->lName;
-        $this->lName = $sanitized[0];
-        $result = $this->update();
-
-        if($result){
-            return $result;
-        }
-
-        $this->lName = $lastName;
-        return $result;
+        return $this->updateHelper($newLName, $this->lName);
     }
 
     public function setFirstName($newFName){
-        $sanitized = sanitize([$newFName]);
-        $firstName = $this->fName;
-        $this->fName = $sanitized[0];
-        $result = $this->update();
-
-        if($result){
-            return $result;
-        }
-
-        $this->lName = $firstName;
-        return $result;
+        return $this->updateHelper($newFName, $this->fName);
     }
 
     public function setEmail($newEmail){
-        $sanitized = sanitize([$newEmail]);
-        $email = $this->email;
-        $this->email = $sanitized[0];
-        $result = $this->update();
-
-        if($result){
-            return $result;
-        }
-
-        $this->email = $email;
-        return $result;
+        return $this->updateHelper($newEmail, $this->email);
     }
 }

@@ -1,6 +1,5 @@
 <?php
-class watchListItem{
-    private $id;
+class watchListItem extends orm{
     private $watchlistId;
     private $companyId;
     private $notes;
@@ -11,12 +10,6 @@ class watchListItem{
         $this->companyId = $companyId;
         $this->notes = $notes;
     }
-
-    private function update(){
-        $db = new db;
-        return $db->query("update watchlistitems w set w.WatchListId = '$this->watchlistId', w.CompanyId = '$this->companyId', w.Notes = '$this->notes' where w.Id = '$this->id'");
-    }
-
 
     public static function create($watchlistId, $companyId, $notes){
         $db = new db;
@@ -50,6 +43,11 @@ class watchListItem{
         return new watchListItem($result['Id'], $result['WatchListId'], $result['CompanyId'], $result['Notes']);
     }
 
+    protected function update(){
+        $db = new db;
+        return $db->query("update watchlistitems w set w.WatchListId = '$this->watchlistId', w.CompanyId = '$this->companyId', w.Notes = '$this->notes' where w.Id = '$this->id'");
+    }
+
     public function getId(){
         return $this->id;
     }
@@ -67,41 +65,14 @@ class watchListItem{
     }
 
     public function setWatchlistId($newWatchListId){
-        $sanitized = sanitize([$newWatchListId]);
-        $watchListId = $this->watchListId;
-        $this->watchlistId = $sanitized[0];
-        $result = $this->update();
-
-        if($result){
-            return $result;
-        }
-        $this->watchlistId = $watchListId;
-        return $result;
+        return $this->updateHelper($newWatchListId, $this->watchlistId);
     }
 
     public function setCompanyId($newCompanyId){
-        $sanitized = sanitize([$newCompanyId]);
-        $companyId = $this->watchListId;
-        $this->companyId = $sanitized[0];
-        $result = $this->update();
-        if($result){
-            return $result;
-        }
-
-        $this->watchlistId = $companyId;
-        return $result;
+        return $this->updateHelper($newCompanyId, $this->companyId);
     }
 
     public function setNotes($newNotes){
-        $sanitized = sanitize([$newNotes]);
-        $notes = $this->notes;
-        $this->notes = $sanitized[0];
-        $result = $this->update();
-        if($result){
-            return $result;
-        }
-
-        $this->notes = $notes;
-        return $result;
+        return $this->updateHelper($newNotes, $this->companyId);
     }
 }

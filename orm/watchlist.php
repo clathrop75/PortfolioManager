@@ -1,6 +1,5 @@
 <?php
-class watchList{
-    private $id;
+class watchList extends orm{
     private $userId;
     private $watchListName;
 
@@ -8,11 +7,6 @@ class watchList{
         $this->id = $id;
         $this->userId = $userId;
         $this->watchListName = $watchlistName;
-    }
-
-    private function update(){
-        $db = new db;
-        return $db->query("update watchlist w set w.UserId = '$this->userId', w.WatchListName = '$this->watchListName' where w.Id = '$this->id'");
     }
 
     public static function create($userId, $watchListName){
@@ -66,7 +60,12 @@ class watchList{
         return $watchLists;
     }
 
-    public function id(){
+    protected function update(){
+        $db = new db;
+        return $db->query("update watchlist w set w.UserId = '$this->userId', w.WatchListName = '$this->watchListName' where w.Id = '$this->id'");
+    }
+
+    public function getId(){
         return $this->id;
     }
 
@@ -79,16 +78,7 @@ class watchList{
     }
 
     public function setWatchListName($newName){
-        $sanitized = sanitize([$newName]);
-        $watchListName = $this->watchListName;
-        $this->watchListName = $sanitized[0];
-        $result = $this->update();
-
-        if($result){
-            return $result;
-        }
-        $this->watchListName = $watchListName;
-        return $result;
+        return $this->updateHelper($newName, $this->watchListName);
     }
 
 }

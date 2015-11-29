@@ -1,11 +1,16 @@
 <?php
 
-class router
-{
+class router {
+    public $auth = true;
     public $get = array();
     public $post = array();
     public $put = array();
     public $delete = array();
+    public $bypass;
+
+    public function __construct(){
+        $this->bypass = new bypass();
+    }
 
     private function isId($string){
         if (ctype_digit($string)) {
@@ -25,60 +30,105 @@ class router
     }
 
     private function error($url){
+        //need to figure out error redirection
         header("HTTP/1.0 400 Bad Request");
         print("Did not understand URL");
+        die();
     }
 
-    function routeRequest()
+    private function login(){
+        header('location: http://localhost:8888/login');
+        die();
+    }
+
+    public function authenticateRequest(){
+        if(isset($_COOKIE['portfolio_manager_auth_cookie'])){
+            $user = user::getByCookie($_COOKIE['portfolio_manager_auth_cookie']);
+            if($user)
+                $GLOBALS['USER'] = $user;
+        }
+    }
+
+    public function routeRequest()
     {
         $method = $_SERVER['REQUEST_METHOD'];
         $baseUrl = $this->getCurrentUri();
         $urlEnd = explode('/', $baseUrl);
         $urlEnd = end($urlEnd);
 
-        if($baseUrl == '/'){
-            readfile('./webroot/home.html');
-            exit();
-        }
+        if (!isset($GLOBALS['USER']) && $this->auth) {
+            switch ($method) {
+                case "GET":
+                    if (isset($this->bypass->get[$baseUrl])) {
+                        $this->bypass->get[$baseUrl]();
+                    } else {
+                        $this->login();
+                    }
+                    break;
+                case "POST":
+                    if (isset($this->bypass->post[$baseUrl])) {
+                        $this->bypass->post[$baseUrl]();
+                    } else {
+                        $this->login();
+                    }
+                    break;
+                case "PUT":
+                    if (isset($this->bypass->put[$baseUrl])) {
+                        $this->bypass->put[$baseUrl]();
+                    } else {
+                        $this->login();
+                    }
+                    break;
+            }
 
-        $requestInfo = array();
-        if($this->isId($urlEnd)){
-            $baseUrl = substr($baseUrl, 0, strpos($baseUrl, $urlEnd)) . '#id';
-            $requestInfo['id'] = $urlEnd;
-        }
+        } else {
 
-        switch($method){
-            case "GET":
-                if($this->get[$baseUrl] != null){
-                    $this->get[$baseUrl]($requestInfo);
-                }else{
-                    $this->error($baseUrl);
-                }
-                break;
-            case "POST":
-                if($this->post[$baseUrl] != null){
-                    $this->post[$baseUrl]($requestInfo);
-                }else{
-                    $this->error($baseUrl);
-                }
-                break;
-            case "PUT":
-                if($this->put[$baseUrl] != null){
-                    $this->put[$baseUrl]($requestInfo);
-                }else{
-                    $this->error($baseUrl);
-                }
-                break;
-            case "DELETE":
-                if($this->delete[$baseUrl] != null){
-                    $this->delete[$baseUrl]($requestInfo);
-                }else{
-                    $this->error($baseUrl);
-                }
-                break;
+            $requestInfo = array();
+            if ($this->isId($urlEnd)) {
+                $baseUrl = substr($baseUrl, 0, strpos($baseUrl, $urlEnd)) . '#id';
+                $requestInfo['id'] = $urlEnd;
+            }
 
+            switch ($method) {
+                case "GET":
+                    if (isset($this->get[$baseUrl])) {
+                        $this->get[$baseUrl]($requestInfo);
+                    }
+                    elseif(isset($this->bypass->get[$baseUrl])){
+                            $this->bypass->get[$baseUrl]();
+                    } else {
+                        $this->error($baseUrl);
+                    }
+                    break;
+                case "POST":
+                    if (isset($this->post[$baseUrl])) {
+                        $this->post[$baseUrl]($requestInfo);
+                    }
+                    elseif(isset($this->bypass->post[$baseUrl])){
+                        $this->bypass->post[$baseUrl]();
+                    } else {
+                        $this->error($baseUrl);
+                    }
+                    break;
+                case "PUT":
+                    if (isset($this->put[$baseUrl])) {
+                        $this->put[$baseUrl]($requestInfo);
+                    }
+                    elseif(isset($this->bypass->put[$baseUrl])){
+                        $this->bypass->put[$baseUrl]();
+                    } else {
+                        $this->error($baseUrl);
+                    }
+                    break;
+                case "DELETE":
+                    if ($this->delete[$baseUrl] != null) {
+                        $this->delete[$baseUrl]($requestInfo);
+                    } else {
+                        $this->error($baseUrl);
+                    }
+                    break;
+            }
         }
     }
-
 }
 

@@ -10,6 +10,7 @@ In phpMyAdmin create a new database called "portfolio_manager". Then click on th
 6. watchlist.sql
 7. watchlistitems.sql
 8. transaction.sql
+9. auth.sql 
 
 ##Stored Procedures
 
