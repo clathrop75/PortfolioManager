@@ -129,4 +129,15 @@ BEGIN
 	
 END//
 
+CREATE PROCEDURE spGetMagicFormulaList(varYear INT(6))
+BEGIN
+	SELECT (ey.EyRank + roc.RocRank) AS CombinedRank, ey.EyRank, roc.RocRank, ey.CompanyId, c.Symbol, ey.EarningsYield, roc.ReturnOnCapital FROM 
+	(SELECT (@eyrownum:=@eyrownum+1) AS EyRank, CompanyId, EarningsYield FROM (SELECT @eyrownum:=0) AS r, KeyStats ORDER BY EarningsYield DESC) AS ey INNER JOIN
+	(SELECT (@rocrownum:=@rocrownum+1) AS RocRank, b.CompanyId, (i.EBITDA/(IFNULL(b.TotalCurrentAssets, 0) - IFNULL(b.TotalCurrentLiabilities, 0) + IFNULL(b.LongTermInvestments, 0) + IFNULL(b.PropertyPlantEquipment, 0))) AS ReturnOnCapital
+	FROM (SELECT @rocrownum:=0) AS r, BalanceSheet b INNER JOIN IncomeStatement i ON b.CompanyId=i.CompanyId AND b.YearEnding=i.YearEnding
+	WHERE b.YearEnding=varYear ORDER BY ReturnOnCapital DESC) AS roc
+	ON ey.CompanyId=roc.CompanyId INNER JOIN Company c ON c.Id=ey.CompanyId
+    ORDER BY CombinedRank;
+END//
+
 DELIMITER ;
