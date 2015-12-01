@@ -37,7 +37,7 @@ class router {
     }
 
     private function login(){
-        header('location: http://localhost:8888/login');
+        header('/login');
         die();
     }
 

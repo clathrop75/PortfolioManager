@@ -34,8 +34,11 @@ $router->bypass->post['/login'] = function(){
             $cookie = md5($encrypt. $_SERVER['REMOTE_ADDR']. $auth->getSalt());
             $auth->setAuthCookieExp($expiration);
             $auth->setAuthCookie($cookie);
+            if(isset($_COOKIE['portfolio_manager_auth_cookie'])){
+                unset($_COOKIE['portfolio_manager_auth_cookie']);
+            };
             setcookie('portfolio_manager_auth_cookie', $cookie, $expiration);
-            header('location: http://localhost:8888/watchlist');
+            header('location: /watchlist');
             die();
         }else{
             //password incorrect
@@ -59,8 +62,12 @@ $router->bypass->post['/signup'] = function(){
     if(!$auth){
         //failure, need to delete user that I just tried to put in
     }
+
+    if(isset($_COOKIE['portfolio_manager_auth_cookie'])){
+        unset($_COOKIE['portfolio_manager_auth_cookie']);
+    };
     setcookie('portfolio_manager_auth_cookie', $auth[0], $auth[1]);
-    header('location: http://localhost:8888/watchlist');
+    header('location: /watchlist');
     die();
 
 };
