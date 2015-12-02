@@ -79,59 +79,24 @@ body {
 
 .top{
 	background-color: #60656C;
-	border-top: solid;
 	border-bottom: solid;
-	border-left: solid;
-}
-.companyName{
-    width: 150px;
-    float: left;
-    padding: 10px;
 
 }
 
-.totalShares{
-    width: 100px;
-    float: left;	
-    padding: 10px;
-
-}
-
-.openPrice{
-    width: 150px;
-    float: left;	
-    padding: 10px;
-
-}
-
-.lastPrice{
-    width: 100px;
-    float: left;
-    padding: 10px;
-}
-
-.currentPrice{
-    width: 100px;
-    float: left;
-    padding: 10px;
-}
-.currentValue{
-    width: 100px;
-    float: left;
-    padding: 10px;
-}
 .summaryContainer:nth-child(2n){
 	background-color: #B1B5BA;
 }
 .summaryContainer{
-    width: 712px;
-    padding-bottom: 15px;
-    float: left;
-    clear: both;
-    border-right: solid;
+    /*border-right: solid;
     border-bottom: solid;
-    border-left: solid;
+    border-left: solid;*/
 }
-.currentPrice{
+td{
+	padding: 10px;
 	border-right: solid;
+	text-align: center;
+}
+table{
+	border: solid;
+	border-collapse: collapse;
 }

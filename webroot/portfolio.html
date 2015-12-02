@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Portfolio</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="./webroot/jquery/tablesorter/jquery.tablesorter.js"></script> 
     <script src="./webroot/js/portfolioController.js"></script>
     <link rel="stylesheet" type="text/css" href="./webroot/css/main.css" />
 </head>
@@ -28,13 +29,19 @@
     	<div class="navElement button">Analyze</div>
     </div>
     <div id="portFolioSummary">
-        <div class="topContainer">
-            <div class="companyName top">Company</div>
-            <div class="totalShares top">Shares</div>
-            <div class="openPrice top">Days Range</div>
-            <div class="lastPrice top">Last Price</div>
-            <div class="currentPrice top">Current Value</div>
-        </div>
+    <table id="portfolioTable">
+        <thead class="topContainer">
+        <tr>
+            <td class="companyName top">Company</td>
+            <td class="totalShares top">Shares</td>
+            <td class="openPrice top">Days Range</td>
+            <td class="lastPrice top">Last Price</td>
+            <td class="currentPrice top">Current Value</td>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
     </div>
 </body>
 </html>

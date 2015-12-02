@@ -54,16 +54,17 @@ $(document).ready(function() {
                             data: { symbol : summary.company.symbol},
                             success: function(quote){
                                 $info = quote.query.results.quote;
-                                var companyName = '<div class="companyName">'+ summary.company.companyName +'</div>';
-                                var totalShares = '<div class="totalShares">'+ round(summary.totalShares, 2) +'</div>';
-                                var open = '<div class="openPrice">'+ $info.DaysRange +'</div>';
-                                var lastPrice = '<div class="lastPrice">'+ round($info.LastTradePriceOnly, 2) +'</div>';
-                                var currentValue = '<div class="currentValue">' + round($info.LastTradePriceOnly * summary.totalShares, 2) + '</div>';
-                                $('#portFolioSummary').append("<div class='summaryContainer'>" + companyName + totalShares + open + lastPrice + currentValue + "</div>");
+                                var companyName = '<td class="companyName">'+ summary.company.companyName +'</div>';
+                                var totalShares = '<td class="totalShares">'+ round(summary.totalShares, 2) +'</td>';
+                                var open = '<td class="openPrice">'+ $info.DaysRange +'</td>';
+                                var lastPrice = '<td class="lastPrice">'+ round($info.LastTradePriceOnly, 2) +'</td>';
+                                var currentValue = '<td class="currentValue">' + round($info.LastTradePriceOnly * summary.totalShares, 2) + '</td>';
+                                $("tbody").append('<tr class="summaryContainer">' + companyName + totalShares + open + lastPrice + currentValue + "</tr>");
                             }
                          })
                     }(portfolioSummary[i]));
                 }
+                $("#portfolioTable").tablesorter(); 
             }
         });
 });
