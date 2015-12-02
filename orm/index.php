@@ -29,4 +29,5 @@ require 'watchlist.php';
 require 'watchlistItem.php';
 require 'transaction.php';
 require 'auth.php';
+require 'company.php';
 

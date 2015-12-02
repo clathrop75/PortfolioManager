@@ -38,7 +38,7 @@ $router->bypass->post['/login'] = function(){
                 unset($_COOKIE['portfolio_manager_auth_cookie']);
             };
             setcookie('portfolio_manager_auth_cookie', $cookie, $expiration);
-            header('location: /watchlist');
+            header('location: /portfolio');
             die();
         }else{
             //password incorrect
@@ -67,7 +67,7 @@ $router->bypass->post['/signup'] = function(){
         unset($_COOKIE['portfolio_manager_auth_cookie']);
     };
     setcookie('portfolio_manager_auth_cookie', $auth[0], $auth[1]);
-    header('location: /watchlist');
+    header('location: /portfolio');
     die();
 
 };

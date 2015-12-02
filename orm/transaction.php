@@ -47,7 +47,7 @@ class transaction extends orm
         }
         $transactions = array();
         while ($row = $result->fetch_assoc()) {
-            $transactions[] = new transaction($row['Id'], $row['CompanyId'], $row['UserId'], $row['TransactionType'], $row['TransactionDate'], $row['Shares'], $row['Price'], $row['comission'], $row['notes']);
+            $transactions[] = new transaction($row['Id'], $row['CompanyId'], $row['UserId'], $row['TransactionType'], $row['TransactionDate'], $row['Shares'], $row['Price'], $row['Commission'], $row['Notes']);
         }
 
         return $transactions;

@@ -1,0 +1,38 @@
+.topContainer{
+    width: 900px;
+}
+
+.summaryContainer{
+    width: 900px;
+}
+
+.companyName{
+    width: 100px;
+    float: left;
+}
+
+.totalShares{
+    width: 100px;
+    float: left;
+}
+
+.openPrice{
+    width: 100px;
+    float: left
+}
+
+.lastPrice{
+    width: 100px;
+    float: left;
+}
+
+.currentPrice{
+    width: 100px;
+    float: left;
+}
+
+.summaryContainer{
+    padding-bottom: 15px;
+    float: left;
+    clear: both;
+}
