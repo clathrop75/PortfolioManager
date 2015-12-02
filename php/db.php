@@ -5,16 +5,16 @@ class db{
     private $host = "localhost:8889";
     private $username = "root";
     private $password = "root";
-    private $db = "portfolioManager";
+    private $db = "stockmanager";
 
 //    private $host = "stockmanager.cj3pq6afxg33.us-east-1.rds.amazonaws.com";
 //    private $username = "smadmin";
 //    private $password = "COMP426final";
 //    private $db = "stockmanager";
-    private $port = 3306;
+    private $port = 8889;
 
     public function connect(){
-        $conn = mysqli_connect($this->host, $this->username, $this->password, $this->db, $this->port);
+        $conn = mysqli_connect($this->host, $this->username, $this->password, $this->db);
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
             return 0;
