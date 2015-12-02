@@ -79,6 +79,9 @@ body {
 
 .top{
 	background-color: #60656C;
+	border-top: solid;
+	border-bottom: solid;
+	border-left: solid;
 }
 .companyName{
     width: 150px;
@@ -112,12 +115,23 @@ body {
     float: left;
     padding: 10px;
 }
+.currentValue{
+    width: 100px;
+    float: left;
+    padding: 10px;
+}
 .summaryContainer:nth-child(2n){
 	background-color: #B1B5BA;
 }
 .summaryContainer{
-    width: 700px;
+    width: 712px;
     padding-bottom: 15px;
     float: left;
     clear: both;
+    border-right: solid;
+    border-bottom: solid;
+    border-left: solid;
+}
+.currentPrice{
+	border-right: solid;
 }
