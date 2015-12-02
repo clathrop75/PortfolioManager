@@ -19,6 +19,7 @@ body {
 }
 .button.navElement {
 	width: 100px;
+	text-align: center;
 }
 
 .button {
@@ -76,36 +77,46 @@ body {
     width: 900px;
 }
 
-.summaryContainer{
-    width: 900px;
+.top{
+	background-color: #60656C;
 }
-
 .companyName{
-    width: 100px;
+    width: 150px;
     float: left;
+    padding: 10px;
+
 }
 
 .totalShares{
     width: 100px;
-    float: left;
+    float: left;	
+    padding: 10px;
+
 }
 
 .openPrice{
-    width: 100px;
-    float: left
+    width: 150px;
+    float: left;	
+    padding: 10px;
+
 }
 
 .lastPrice{
     width: 100px;
     float: left;
+    padding: 10px;
 }
 
 .currentPrice{
     width: 100px;
     float: left;
+    padding: 10px;
 }
-
+.summaryContainer:nth-child(2n){
+	background-color: #B1B5BA;
+}
 .summaryContainer{
+    width: 700px;
     padding-bottom: 15px;
     float: left;
     clear: both;
