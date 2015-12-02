@@ -64,7 +64,7 @@ $(document).ready(function() {
                          })
                     }(portfolioSummary[i]));
                 }
-                $("#portfolioTable").tablesorter(); 
+            	$("#portfolioTable").tablesorter(); 
             }
         });
 });

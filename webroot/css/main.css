@@ -17,7 +17,7 @@ body {
 .rightButton{
 	float: right;
 }
-.button.navElement {
+.button.navButton {
 	width: 100px;
 	text-align: center;
 }
@@ -68,7 +68,7 @@ body {
 	padding-bottom: 60px;
 
 }
-.navElement{
+.navButton{
 	float: left;
     width: 100px;
 }
