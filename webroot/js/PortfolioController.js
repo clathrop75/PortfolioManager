@@ -8,7 +8,7 @@ $(document).ready(function() {
         {type: "GET",
             dataType: "json",
             success: function(user){
-                $('#currentUser').text(user.firstName);
+                $('#currentUser').text("Hi " + user.firstName);
             }
         });
 
