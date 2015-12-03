@@ -34,7 +34,12 @@ $(document).ready(function() {
                 	var shares = '<td class="shares">' + round(transactions[i].shares, 2) + '</td>';
                 	var price = '<td class="price">' + transactions[i].price + '</td>';
 					var commission = '<td class="commission">' + transactions[i].commission + '</td>';
-                	var notes = '<td class="notes">' + transactions[i].notes + '</td>';
+					if (transactions[i].notes == null){
+						var notes = '<td class="notes">' + "No notes" + '</td>';
+					}
+					else {
+                		var notes = '<td class="notes">' + transactions[i].notes + '</td>';
+                	}
                 	$("tbody").append('<tr class="summaryContainer">' + actions + company + symbol + type + date + shares + price + commission + notes + "</tr>");
                 }
             }
@@ -42,6 +47,9 @@ $(document).ready(function() {
 });
 
 $(document).ajaxStop(function(){
-	$("#portfolioTable").tablesorter();
+	$("#portfolioTable").tablesorter({ 
+        // sort on the first column, order asc 
+        sortList: [[1,0]] 
+    });
 	$("#portfolioTable").removeAttr("hidden");
 });
