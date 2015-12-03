@@ -11,6 +11,28 @@ $(document).ready(function() {
                 $('#currentUser').text("Hi " + user.firstName);
             }
     });
+    
+    $("#add").on('click', function(e){
+    	//get values from fields
+    	var newTransaction = {
+   	 		symbol:$("[name='symbol']").val(), 
+    		type:$("#type").val(),
+    		date:$("[name='date']").val(),
+    		shares:$("[name='shares']").val(),
+    		price:$("[name='price']").val(), 
+    		commission:$("[name='commission']").val(),
+    		notes:$("[name='notes']").val()
+    	};
+    	debugger;
+		$.ajax("http://localhost:8888/mock/transaction",
+			{type: "POST",
+				datatype: "json",
+				data: {newTransaction},
+				success: function(e){
+					alert("Success");
+				}
+			});
+    });
 
 
 
