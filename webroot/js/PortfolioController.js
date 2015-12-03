@@ -10,7 +10,7 @@ $(document).ready(function() {
             success: function(user){
                 $('#currentUser').text("Hi " + user.firstName);
             }
-        });
+    });
 
 
 

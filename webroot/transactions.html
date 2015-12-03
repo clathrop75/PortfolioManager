@@ -6,6 +6,7 @@
 	<script src="./webroot/jquery/tablesorter/jquery.tablesorter.js"></script> 
     <script src="./webroot/js/TransactionController.js"></script>
 	<link rel="stylesheet" type="text/css" href="./webroot/css/main.css" />
+	<link rel="stylesheet" type="text/css" href="./webroot/css/transactions.css" />
 </head>
 <body>
 	<div class="title">
@@ -26,6 +27,21 @@
     	<div class="navElement"><a class="button navButton" href="./watchlists">Watch Lists</a></div>
     	<div class="navElement"><a class="button navButton" href="./research">Research</a></div>
     	<div class="navElement"><a class="button navButton" href="./analyze">Analyze</a></div>
+    </div>
+    <div class="addTransaction">
+    	<form class ="addForm">
+    		<input class ="input add" type="text" name="symbol" value="" placeholder="Symbol" class="input">
+			<select class="add">
+  				<option value="1">Buy</option>
+  				<option value="0">Sell</option>   
+  			</select>		
+  			<input class="add" type="date" name="date">    		
+  			<input class ="input add" type="text" name="shares" value="" placeholder="Shares" class="input">
+    		<input class ="input add" type="text" name="price" value="" placeholder="Price" class="input">
+    		<input class ="input add" type="text" name="commission" value="" placeholder="Commission" class="input">
+    		<input class ="input add" type="text" name="notes" value="" placeholder="Notes" class="input">
+    		<a href="./portfolio" class="addButton">Add</a>
+    	</form>
     </div>
     <div id="portFolioSummary">
     <table hidden id="portfolioTable">

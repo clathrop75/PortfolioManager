@@ -10,7 +10,7 @@ $(document).ready(function() {
             success: function(user){
                 $('#currentUser').text("Hi " + user.firstName);
             }
-        });
+    });
 
 
 
@@ -48,7 +48,7 @@ $(document).ready(function() {
 
 $(document).ajaxStop(function(){
 	$("#portfolioTable").tablesorter({ 
-        // sort on the first column, order asc 
+        // sort on the second column, order asc 
         sortList: [[1,0]] 
     });
 	$("#portfolioTable").removeAttr("hidden");
