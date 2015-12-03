@@ -91,7 +91,12 @@ body {
     border-bottom: solid;
     border-left: solid;*/
 }
-td{
+td {
+	padding: 10px;
+	border-right: solid;
+	text-align: center;
+}
+th {
 	padding: 10px;
 	border-right: solid;
 	text-align: center;

@@ -59,7 +59,9 @@ $(document).ready(function() {
                                 var open = '<td class="openPrice">'+ $info.DaysRange +'</td>';
                                 var lastPrice = '<td class="lastPrice">'+ round($info.LastTradePriceOnly, 2) +'</td>';
                                 var currentValue = '<td class="currentValue">' + round($info.LastTradePriceOnly * summary.totalShares, 2) + '</td>';
-                                $("tbody").append('<tr class="summaryContainer">' + companyName + totalShares + open + lastPrice + currentValue + "</tr>");
+                                var commission = '<td class="commission">' + "test" + '</td>';
+                                var notes = '<td class="notes">' + "test" + '</td>';
+                                $("tbody").append('<tr class="summaryContainer">' + companyName + totalShares + open + lastPrice + currentValue + commission + notes + "</tr>");
                             }
                          })
                     }(portfolioSummary[i]));
