@@ -49,7 +49,7 @@ class company{
         }
         $result = $result->fetch_assoc();
 
-        return new company($result['company.Id'], $result['Symbol'], $result['Sector'], $result['Industry'], $result['AverageDailyVolume'], $result['DayChange'], $result['DaysLow'], $result['DaysHigh'], $result['YearLow'], $result['YearHigh'], $result['MarketCapitalization'], $result['LastTradePriceOnly'], $result['CompanyName'], $result['Volume'], $result['StockExchange'], $result['LastUpdated'], $result['Active']);
+        return new company("$id", $result['Symbol'], $result['Sector'], $result['Industry'], $result['AverageDailyVolume'], $result['DayChange'], $result['DaysLow'], $result['DaysHigh'], $result['YearLow'], $result['YearHigh'], $result['MarketCapitalization'], $result['LastTradePriceOnly'], $result['CompanyName'], $result['Volume'], $result['StockExchange'], $result['LastUpdated'], $result['Active']);
     }
 
     public function getId(){
