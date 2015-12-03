@@ -64,7 +64,12 @@ $(document).ready(function() {
                          })
                     }(portfolioSummary[i]));
                 }
-            	$("#portfolioTable").tablesorter(); 
             }
         });
+});
+
+$(document).ajaxStop(function(){
+	$("#portfolioTable").tablesorter();
+	$("#portfolioTable").removeAttr("hidden");
+	alert("test");
 });
