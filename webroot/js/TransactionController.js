@@ -3,6 +3,20 @@ $(document).ready(function() {
     function round(value, decimals) {
         return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
     }
+    var symbolsList = new Array();
+    
+    $.ajax("http://localhost:8888/symbols",
+    	{type: "GET",
+    		dataType: "json",
+    		success: function(symbols){
+    			for(var i = 0; i < symbols.length; i++){
+    				symbolsList.push(
+    					data:symbols[i],
+    					value:symbols[i]
+    				)     
+    			}	
+    		}
+    });
 
     $.ajax("http://localhost:8888/user",
         {type: "GET",
@@ -13,9 +27,10 @@ $(document).ready(function() {
     });
     
     $("[name='symbol']").autocomplete({
-    	serviceUrl: './symbols',
+    	lookup: symbolsList,
     	onSelect: function(suggestion){
-    		alert("test");
+    	    debugger;
+    		alert("You selected" + suggestion.value + "," + suggestion.data);
     	}
     });
     
@@ -30,7 +45,7 @@ $(document).ready(function() {
     		commission:$("[name='commission']").val(),
     		notes:$("[name='notes']").val()
     	};
-    	debugger;
+    	
 		$.ajax("http://localhost:8888/transaction",
 			{type: "POST",
 				datatype: "json",
@@ -38,7 +53,7 @@ $(document).ready(function() {
 					newTransaction : newTransaction
 				},
 				success: function(){
-var actions = '<td class="action">' + "test" + '</td>';
+					var actions = '<td class="action">' + "test" + '</td>';
                 	var company = '<td class="company">' + "FIX" + '</td>';
                 	var symbol = '<td class="symbol">' + newTransaction.symbol + '</td>';
                 	var temp = newTransaction.type;
