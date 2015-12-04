@@ -49,10 +49,10 @@ $(document).ready(function() {
 				data: {
 					newTransaction : newTransaction
 				},
-				success: function(e){
+				success: function(result){
 					debugger;
-					var actions = '<td class="action">' + "test" + '</td>';
-                	var company = '<td class="company">' + e[0].companyName + '</td>';
+					var actions = '<td class="action"><a href="#" class="delete">-</a></td>';
+                	var company = '<td class="company">' + result[0].companyName + '</td>';
                 	var symbol = '<td class="symbol">' + newTransaction.symbol + '</td>';
                 	var temp = newTransaction.type;
                 	var type;
@@ -83,7 +83,7 @@ $(document).ready(function() {
             dataType: "json",
             success: function(transactions){
                 for(var i = 0; i < transactions.length; i++){
-                	var actions = '<td class="action">' + "test" + '</td>';
+					var actions = '<td class="action"><a href="#" class="delete">-</a></td>';
                 	var company = '<td class="company">' + transactions[i].companyName + '</td>';
                 	var symbol = '<td class="symbol">' + transactions[i].symbol + '</td>';
                 	var temp = transactions[i].type;
