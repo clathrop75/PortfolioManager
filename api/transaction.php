@@ -7,6 +7,7 @@
         foreach($transactions as $transaction){
             $company = company::getById($transaction->getCompanyId());
             $transactionArray[] = [
+                "id"          => $transaction->getId(),
                 "companyName" => $company->getCompanyName(),
                 "symbol"      => $company->getSymbol(),
                 "type"        => $transaction->getTransactionType(),
@@ -34,6 +35,7 @@
         $transaction = transaction::create($company->getId(), $u->getId(), $transaction['type'], $transaction['date'], $transaction['shares'], $transaction['price'], $transaction['commission'], $transaction['notes']);
 
         $newTransaction[] = [
+            "id"          => $transaction->getId(),
             "companyName" => $company->getCompanyName(),
             "symbol"      => $company->getSymbol(),
             "type"        => $transaction->getTransactionType(),
