@@ -28,19 +28,29 @@
     </div>
     <div id="analysis">
 		<form id="analysis_form">
-			Year Beginning: 
+			Year Ending: 
 			<select>
-				<option value="2014">2015</option>
-				<option value="2013">2014</option>
+				<option value="current">Most Recent</option>
+				<option value="2014">2014</option>
 				<option value="2013">2013</option>
+				<option value="2013">2012</option>
 			</select><br>
 			Ranking Formula: 
 			<select>
 				<option value="1">Magic Formula</option>
-				<option value="2">Return on Capital</option>
 				<option value="3">Return on Assets</option>
 				<option value="4">Return on Equity</option>
-				<option value="5">Earnings Yield</option>
+				<option value="4">Earnings Yield</option>
+				<option value="4">Trailing P/E</option>
+				<option value="4">Forward P/E</option>
+			</select><br>
+			Sector: 
+			<select>
+				<option value="0">All</option>
+			</select><br>
+			Industry: 
+			<select>
+				<option value="0">All</option>
 			</select><br>
 			<button type=submit>View Results</button>
 		</form>
