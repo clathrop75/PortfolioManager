@@ -52,6 +52,18 @@ class company{
         return new company("$id", $result['Symbol'], $result['Sector'], $result['Industry'], $result['AverageDailyVolume'], $result['DayChange'], $result['DaysLow'], $result['DaysHigh'], $result['YearLow'], $result['YearHigh'], $result['MarketCapitalization'], $result['LastTradePriceOnly'], $result['CompanyName'], $result['Volume'], $result['StockExchange'], $result['LastUpdated'], $result['Active']);
     }
 
+    public static function getBySymbol($symbol){
+        $db = new db;
+        $sanitized = sanitize([$symbol]);
+        $result = $db->query("select c.id, c.symbol, s.Sector, i.Industry, c.AverageDailyVolume, c.DayChange, c.DaysLow, c.DaysHigh, c.YearLow, c.YearHigh, c.marketcapitalization, c.lasttradepriceonly, c.companyname, c.volume, c.stockexchange, c.lastupdated, c.active from company c, sector s, industry i where c.Symbol = '$sanitized[0]' AND s.Id=c.SectorId AND i.Id=c.IndustryId");
+
+        if($result->num_rows == 0){
+            return 0;
+        }
+        $result = $result->fetch_assoc();
+        return new company($result['id'], $result['symbol'], $result['Sector'], $result['Industry'], $result['AverageDailyVolume'], $result['DayChange'], $result['DaysLow'], $result['DaysHigh'], $result['YearLow'], $result['YearHigh'], $result['marketcapitalization'], $result['lasttradepriceonly'], $result['companyname'], $result['volume'], $result['stockexchange'], $result['lastupdated'], $result['active']);
+    }
+
     public function getId(){
         return $this->id;
     }

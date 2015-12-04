@@ -4,7 +4,7 @@ $(document).ready(function() {
         return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
     }
 
-    $.ajax("http://localhost:8888/mock/user",
+    $.ajax("http://localhost:8888/user",
         {type: "GET",
             dataType: "json",
             success: function(user){
@@ -24,10 +24,12 @@ $(document).ready(function() {
     		notes:$("[name='notes']").val()
     	};
     	debugger;
-		$.ajax("http://localhost:8888/mock/transaction",
+		$.ajax("http://localhost:8888/transaction",
 			{type: "POST",
 				datatype: "json",
-				data: {newTransaction},
+				data: {
+					newTransaction : newTransaction
+				},
 				success: function(e){
 					alert("Success");
 				}
@@ -36,7 +38,7 @@ $(document).ready(function() {
 
 
 
-    $.ajax("http://localhost:8888/mock/transaction",
+    $.ajax("http://localhost:8888/transaction",
         {type: "GET",
             dataType: "json",
             success: function(transactions){
