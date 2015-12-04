@@ -55,7 +55,7 @@
     };
 
     $router->delete['/transaction/#id'] = function($id){
-        $result = transaction::deleteById($id);
+        $result = transaction::deleteById($id['id']);
 
         if($result){
             header('HTTP/1.1 200');
