@@ -1,8 +1,7 @@
 DELIMITER //
 
-CREATE PROCEDURE spGetPortfolioSummary(varUsername VARCHAR(50))
+CREATE PROCEDURE spGetPortfolioSummary(varUserId INT(11))
 BEGIN
-	DECLARE varUserId INT;
 	DECLARE varRunningSold FLOAT;
 	DECLARE varCurrentStock INT;
 	DECLARE varStockCount INT;
@@ -19,7 +18,6 @@ BEGIN
 	CREATE TEMPORARY TABLE portfolio(CompanyName VARCHAR(100), Symbol VARCHAR(10), LastTradePriceOnly FLOAT, TotalShares FLOAT, CostBasis FLOAT, MarketValue FLOAT, TotalGain FLOAT, ReturnPct FLOAT);
 	CREATE TEMPORARY TABLE stocks(CompanyId INT);
 	
-	SELECT u.Id INTO varUserId FROM User u WHERE u.UserName=varUsername;
     INSERT INTO stocks SELECT DISTINCT t.CompanyId FROM transaction t WHERE t.UserId=varUserId;
 	SELECT COUNT(*) INTO varStockCount FROM stocks;
 	

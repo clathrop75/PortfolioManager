@@ -20,9 +20,9 @@ class portfolio extends orm{
 		$this->returnPercent = $returnPercent;
     }
 
-    public static function getByUserNamePortfolio($userName){
+    public static function getByUserIdPortfolio($userId){
         $db = new db;
-        $result = $db->query("CALL spGetPortfolioSummary('$userName')");
+        $result = $db->query("CALL spGetPortfolioSummary('$userId')");
 
         if($result->num_rows == 0){
             return 0;

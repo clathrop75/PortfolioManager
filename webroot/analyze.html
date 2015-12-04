@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Stock Manager - Analyze</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="js/analyzeController.js"></script>
+</head>
+
+<body>
+	<div class="title">
+		Analyze and Review Stocks
+	</div>
+    <div class="buttonContainer">
+    	<div class="leftButton">
+    	    <a href="./login" class="button"><div id="currentUser"></div></a>
+    	</div>
+    	<div class="rightButton">
+    		<a href="./home" class="button">Logout</a>
+    	</div>
+    </div>
+    <br><br>
+    <div class="navbar">
+    	<div class="navElement"><a class="button navButton" href="./portfolio">Portfolio</a></div>
+    	<div class="navElement"><a class="button navButton" href="./transactions">Transactions</a></div>
+    	<div class="navElement"><a class="button navButton" href="./watchlists">Watch Lists</a></div>
+    	<div class="navElement"><a class="button navButton" href="./research">Research</a></div>
+    	<div class="navElement"><a class="button navButton" href="./analyze">Analyze</a></div>
+    </div>
+    <div id="analysis">
+		<form id="analysis_form">
+			Year Beginning: 
+			<select>
+				<option value="2014">2015</option>
+				<option value="2013">2014</option>
+				<option value="2013">2013</option>
+			</select><br>
+			Ranking Formula: 
+			<select>
+				<option value="1">Magic Formula</option>
+				<option value="2">Return on Capital</option>
+				<option value="3">Return on Assets</option>
+				<option value="4">Return on Equity</option>
+				<option value="5">Earnings Yield</option>
+			</select><br>
+			<button type=submit>View Results</button>
+		</form>
+    </div>
+	<div id="results">
+	</div>
+</body>
+
+</html>
