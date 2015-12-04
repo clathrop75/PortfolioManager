@@ -53,3 +53,15 @@
         print json_encode($newTransaction);
         die();;
     };
+
+    $router->delete['/transaction/#id'] = function($id){
+        $result = transaction::deleteById($id);
+
+        if($result){
+            header('HTTP/1.1 200');
+        }else{
+            header('HTTP/1.1 500');
+        }
+
+        die();
+    };

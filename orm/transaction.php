@@ -23,6 +23,12 @@ class transaction extends orm
         $this->notes = $notes;
     }
 
+    public static function deleteById($id){
+        $db = new db;
+        $result = $db->query("delete from transaction where Id = '$id'");
+        return $result;
+    }
+
     public static function getById($id)
     {
         $db = new db;
