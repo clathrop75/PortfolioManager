@@ -15,7 +15,13 @@
     };
 
 
-
+    $router->get['/logout'] = function(){
+        if(isset($_COOKIE['portfolio_manager_auth_cookie'])){
+            setcookie('portfolio_manager_auth_cookie',"", time()-3600);
+        };
+        header('location: /');
+        die();
+    };
 
     $router->get['/home/#id'] = function($req){
         echo  $req['id'];
