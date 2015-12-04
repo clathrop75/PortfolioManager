@@ -30,9 +30,29 @@ $(document).ready(function() {
 				data: {
 					newTransaction : newTransaction
 				},
-				success: function(e){
-					alert("Success");
-				}
+				success: function(){
+var actions = '<td class="action">' + "test" + '</td>';
+                	var company = '<td class="company">' + "FIX" + '</td>';
+                	var symbol = '<td class="symbol">' + newTransaction.symbol + '</td>';
+                	var temp = newTransaction.type;
+                	var type;
+                	if (temp == 1){
+                		type = '<td class="type">' + "Buy" + '</td>';
+                	}
+                	else {
+                		type = '<td class="type">' + "Sell" + '</td>';
+                	}
+                	var date = '<td class="date">' + newTransaction.date + '</td>';
+                	var shares = '<td class="shares">' + round(newTransaction.shares, 2) + '</td>';
+                	var price = '<td class="price">' + newTransaction.price + '</td>';
+					var commission = '<td class="commission">' + newTransaction.commission + '</td>';
+					if (newTransaction.notes == null){
+						var notes = '<td class="notes">' + "No notes" + '</td>';
+					}
+					else {
+                		var notes = '<td class="notes">' + newTransaction.notes + '</td>';
+                	}
+                	$("tbody").append('<tr class="summaryContainer">' + actions + company + symbol + type + date + shares + price + commission + notes + "</tr>");				}
 			});
     });
 
