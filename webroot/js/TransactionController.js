@@ -50,7 +50,7 @@ $(document).ready(function() {
 				},
 				success: function(result){
 					debugger;
-					var actions = '<td class="action"><span class="editSpan"><a href="#" class="edit">Edit</a></span><a href="#" class="delete">-</a></td>';
+					var actions = '<td class="action"><span class="editSpan"><a class="edit">Edit</a></span><a id="' + result[0].id + '" class="delete">-</a></td>';
                 	var company = '<td class="company">' + result[0].companyName + '</td>';
                 	var symbol = '<td class="symbol">' + newTransaction.symbol + '</td>';
                 	var temp = newTransaction.type;
@@ -74,15 +74,13 @@ $(document).ready(function() {
                 	$("tbody").append('<tr class="summaryContainer">' + actions + company + symbol + type + date + shares + price + commission + notes + "</tr>");				}
 			});
     });
-
-
-
+    
     $.ajax("http://localhost:8888/transaction",
         {type: "GET",
             dataType: "json",
             success: function(transactions){
                 for(var i = 0; i < transactions.length; i++){
-					var actions = '<td class="action"><span class="editSpan"><a href="#" class="edit">Edit</a></span><a href="#" class="delete">-</a></td>';
+					var actions = '<td class="action"><span class="editSpan"><a class="edit">Edit</a></span><a id="' + transactions[i].id + '" class="delete">-</a></td>';
                 	var company = '<td class="company">' + transactions[i].companyName + '</td>';
                 	var symbol = '<td class="symbol">' + transactions[i].symbol + '</td>';
                 	var temp = transactions[i].type;
@@ -107,6 +105,14 @@ $(document).ready(function() {
                 }
             }
         })
+	$(document.body).on('click', '.delete', function(e) {
+		$(this)
+		var url = "http://localhost:8888/transaction/" + $(this).attr("id");
+    	$.ajax(url,
+    		{type: "DELETE"
+    		});
+    });
+
 });
 
 $(document).ajaxStop(function(){
