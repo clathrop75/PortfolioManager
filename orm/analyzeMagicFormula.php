@@ -1,38 +1,74 @@
 <?php
-class portfolio extends orm{
-    private $companyName;
+class analyzeMagicFormula extends orm{
+    private $combinedRank;
+	private $eyRank;
+	private $rocRank;
+	private $companyId;
+	private $companyName;
 	private $symbol;
-	private $lastTradePriceOnly;
-	private $totalShares;
-	private $costBasis;
-	private $marketValue;
-	private $totalGain;
-	private $returnPercent;
+	private $earningsYield;
+	private $returnOnAssets;
 
-    private function __construct($companyName, $symbol, $lastTradePriceOnly, $totalShares, $costBasis, $marketValue, $totalGain, $returnPercent){
-        $this->companyName = $companyName;
+    private function __construct($combinedRank, $eyRank, $rocRank, $companyId, $companyName, $symbol, $earningsYield, $returnOnAssets){
+        $this->combinedRank = $combinedRank;
+        $this->eyRank = $eyRank;
+        $this->rocRank = $rocRank;
+		$this->companyId = $companyId;
+		$this->companyName = $companyName;
         $this->symbol = $symbol;
-        $this->lastTradePriceOnly = $lastTradePriceOnly;
-		$this->totalShares = $totalShares;
-		$this->costBasis = $costBasis;
-        $this->marketValue = $marketValue;
-        $this->totalGain = $totalGain;
-		$this->returnPercent = $returnPercent;
+        $this->earningsYield = $earningsYield;
+		$this->returnOnAssets = $returnOnAssets;
     }
 
-    public static function getByUserNamePortfolio($userName){
+	public static function getList(){
         $db = new db;
-        $result = $db->query("CALL spGetPortfolioSummary('$userName')");
+        $result = $db->query("CALL spGetMagicFormulaList()");
 
         if($result->num_rows == 0){
             return 0;
         }
-        $result = $result->fetch_assoc();
+        $items = array();
 
-        return new portfolio($result['Id'], $result['UserId'], $result['WatchListName']);
+        while($row = $result->fetch_assoc()){
+            $items[] = new analyzeMagicFormula($row['CombinedRank'], $row['EyRank'], $row['RocRank'], $row['CompanyId'], $row['CompanyName'], $row['Symbol'], $row['EarningsYield'], $row['ReturnOnAssets']);
+        }
+
+        return $items;
+    }
+	
+    public static function getByYearList($year){
+        $db = new db;
+        $result = $db->query("CALL spGetMagicFormulaListHistory('$year')");
+
+        if($result->num_rows == 0){
+            return 0;
+        }
+        $items = array();
+
+        while($row = $result->fetch_assoc()){
+            $items[] = new analyzeMagicFormula($row['CombinedRank'], $row['EyRank'], $row['RocRank'], $row['CompanyId'], $row['CompanyName'], $row['Symbol'], $row['EarningsYield'], $row['ReturnOnAssets']);
+        }
+
+        return $items;
     }
 
-    public function getCompanyName(){
+    public function getCombinedRank(){
+        return $this->combinedRank;
+    }
+
+    public function getEyRank(){
+        return $this->eyRank;
+    }
+
+    public function getRocRank(){
+        return $this->rocRank;
+    }
+
+	public function getCompanyId(){
+        return $this->companyId;
+    }
+	
+	public function getCompanyName(){
         return $this->companyName;
     }
 
@@ -40,28 +76,12 @@ class portfolio extends orm{
         return $this->symbol;
     }
 
-    public function getLastTradePriceOnly(){
-        return $this->lastTradePriceOnly;
+    public function getEarningsYield(){
+        return $this->earningsYield;
     }
 
-	public function getTotalShares(){
-        return $this->totalShares;
-    }
-	
-	public function getCostBasis(){
-        return $this->costBasis;
-    }
-
-    public function getMarketValue(){
-        return $this->marketValue;
-    }
-
-    public function getTotalGain(){
-        return $this->totalGain;
-    }
-
-	public function getReturnPercent(){
-        return $this->returnPercent;
+	public function getReturnOnCapital(){
+        return $this->returnOnCapital;
     }
 }
 

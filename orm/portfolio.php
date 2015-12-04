@@ -64,4 +64,3 @@ class portfolio extends orm{
         return $this->returnPercent;
     }
 }
-
