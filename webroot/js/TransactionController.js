@@ -9,11 +9,18 @@ $(document).ready(function() {
     	{type: "GET",
     		dataType: "json",
     		success: function(symbols){
-    			for(var i = 0; i < symbols.length; i++){ 
-    			//something here  
-    			}	
+                symbolsList = symbols;
     		}
+    }).done(function(){
+        $("[name='symbol']").autocomplete({
+            lookup: symbolsList,
+            onSelect: function(suggestion){
+                debugger;
+                alert("You selected" + suggestion.value + "," + suggestion.data);
+            }
+        });
     });
+
 
     $.ajax("http://localhost:8888/user",
         {type: "GET",
@@ -22,15 +29,7 @@ $(document).ready(function() {
                 $('#currentUser').text("Hi " + user.firstName);
             }
     });
-    
-    $("[name='symbol']").autocomplete({
-    	lookup: symbolsList,
-    	onSelect: function(suggestion){
-    	    debugger;
-    		alert("You selected" + suggestion.value + "," + suggestion.data);
-    	}
-    });
-    
+
     $("#add").on('click', function(e){
     	//get values from fields
     	var newTransaction = {
