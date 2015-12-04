@@ -9,11 +9,8 @@ $(document).ready(function() {
     	{type: "GET",
     		dataType: "json",
     		success: function(symbols){
-    			for(var i = 0; i < symbols.length; i++){
-    				symbolsList.push(
-    					data:symbols[i],
-    					value:symbols[i]
-    				)     
+    			for(var i = 0; i < symbols.length; i++){ 
+    			//something here  
     			}	
     		}
     });
@@ -52,9 +49,10 @@ $(document).ready(function() {
 				data: {
 					newTransaction : newTransaction
 				},
-				success: function(){
+				success: function(e){
+					debugger;
 					var actions = '<td class="action">' + "test" + '</td>';
-                	var company = '<td class="company">' + "FIX" + '</td>';
+                	var company = '<td class="company">' + e[0].companyName + '</td>';
                 	var symbol = '<td class="symbol">' + newTransaction.symbol + '</td>';
                 	var temp = newTransaction.type;
                 	var type;
