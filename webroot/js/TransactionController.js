@@ -12,6 +12,13 @@ $(document).ready(function() {
             }
     });
     
+    $("[name='symbol']").autocomplete({
+    	serviceUrl: './symbols',
+    	onSelect: function(suggestion){
+    		alert("test");
+    	}
+    });
+    
     $("#add").on('click', function(e){
     	//get values from fields
     	var newTransaction = {
