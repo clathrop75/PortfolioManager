@@ -33,6 +33,23 @@ class watchListItem extends orm{
         return new watchListItem($result['Id'], $result['WatchListId'], $result['CompanyId'], $result['Notes']);
     }
 
+    public static function getByWatchListId($id){
+        $db = new db;
+        $result = $db->query("select * from watchlistitems w where w.WatchListId = '$id'");
+
+        if($result->num_rows == 0){
+            return 0;
+        }
+
+        $items = array();
+
+        while($row = $result->fetch_assoc()){
+            $items[] = new watchListItem($row['Id'], $row['WatchListId'], $row['CompanyId'], $row['Notes']);
+        }
+
+        return $items;
+    }
+
     private static function getByWatchListItemIdCompanyId($watchlistId, $companyId){
         $db = new db;
         $result =  $db->query("select * from watchlistitems w where w.WatchListId = '$watchlistId' and w.CompanyId = '$companyId'");
