@@ -31,8 +31,23 @@
 
         $company = company::getBySymbol($transaction['symbol']);
 
-        $result = transaction::create($company->getId(), $u->getId(), $transaction['type'], $transaction['date'], $transaction['shares'], $transaction['price'], $transaction['commission'], $transaction['notes']);
+        $transaction = transaction::create($company->getId(), $u->getId(), $transaction['type'], $transaction['date'], $transaction['shares'], $transaction['price'], $transaction['commission'], $transaction['notes']);
+
+        $newTransaction[] = [
+            "companyName" => $company->getCompanyName(),
+            "symbol"      => $company->getSymbol(),
+            "type"        => $transaction->getTransactionType(),
+            "date"        => $transaction->getTransactionDate(),
+            "shares"      => $transaction->getShares(),
+            "price"       => $transaction->getPrice(),
+            "commission"  => $transaction->getCommission(),
+            "notes"       => $transaction->getNotes()
+        ];
+
 
         header('HTTP/1.1 200');
+        header('Content-type: application/json');
+
+        print json_encode($newTransaction);
         die();;
     };
