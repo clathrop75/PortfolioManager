@@ -15,8 +15,6 @@ $(document).ready(function() {
         $("[name='symbol']").autocomplete({
             lookup: symbolsList,
             onSelect: function(suggestion){
-                debugger;
-                alert("You selected" + suggestion.value + "," + suggestion.data);
             }
         });
     });
@@ -71,7 +69,7 @@ $(document).ready(function() {
 					else {
                 		var notes = '<td class="notes">' + newTransaction.notes + '</td>';
                 	}
-                	$("tbody").append('<tr class="summaryContainer">' + actions + company + symbol + type + date + shares + price + commission + notes + "</tr>");				}
+                	$("tbody").append('<tr class="summaryContainer" id="s' + result[0].id + '">' + actions + company + symbol + type + date + shares + price + commission + notes + "</tr>");				}
 			});
     });
     
@@ -101,12 +99,12 @@ $(document).ready(function() {
 					else {
                 		var notes = '<td class="notes">' + transactions[i].notes + '</td>';
                 	}
-                	$("tbody").append('<tr class="summaryContainer">' + actions + company + symbol + type + date + shares + price + commission + notes + "</tr>");
+                	$("tbody").append('<tr class="summaryContainer" id="s' + transactions[i].id + '">' + actions + company + symbol + type + date + shares + price + commission + notes + "</tr>");
                 }
             }
         })
 	$(document.body).on('click', '.delete', function(e) {
-		$(this)
+		$("#s" + $(this).attr("id")).remove();
 		var url = "http://localhost:8888/transaction/" + $(this).attr("id");
     	$.ajax(url,
     		{type: "DELETE"
