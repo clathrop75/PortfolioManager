@@ -19,6 +19,23 @@ $(document).ready(function(){
             }
     });
     
+    var symbolsList = new Array();
+
+    $.ajax("http://localhost:8888/symbols",
+        {
+            type: "GET",
+            dataType: "json",
+            success: function (symbols) {
+                symbolsList = symbols;
+            }
+        }).done(function () {
+        $("[name='symbol']").autocomplete({
+            lookup: symbolsList,
+            onSelect: function (suggestion) {
+            }
+        });
+    });
+    
     $.ajax("http://localhost:8888/watchlist",
     	{type: "GET",
     		dataType: "json",
@@ -43,6 +60,8 @@ $(document).ready(function(){
     					var newRow = '<tr class="summaryContainer" id="s' + watchlists[i].id + watchlists[i].items[j].symbol + '">' + actions + company + symbol + lastPrice + dayChange + percentChange + "</tr>";
     					$("#" + watchlists[i].id).append(newRow);
     				}
+    				var inputBox = '<div class="addSymbol"><form class ="addForm"><input class ="input add" type="text" name="symbol" value="" placeholder="Symbol" class="input"><a class="addButton addSymbolButton" id="add">Add</a></form></div>';
+    				$("#watchlistTables").append(inputBox);
     			}
     		}
     });

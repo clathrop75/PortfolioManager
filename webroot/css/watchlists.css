@@ -1,3 +1,7 @@
+.addWatchlist{
+	padding-bottom:10px;
+}
+
 .add{
 	height: 20px;
 	padding-right: 8px;
@@ -80,4 +84,10 @@
 .negative{
 	color:#eb2323;
 	border-color:black;
+}
+.addSymbol{
+	padding-top:8px;
+}
+.addSymbolButton{
+	padding-left:8px;
 }
