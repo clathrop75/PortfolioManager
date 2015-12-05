@@ -5,9 +5,47 @@
     <title>Watchlists</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="./webroot/jquery/tablesorter/jquery.tablesorter.js"></script> 
+	<script src="./webroot/js/watchListsController.js"></script>
 	<link rel="stylesheet" type="text/css" href="./webroot/css/main.css" />
 </head>
 <body>
-Hello World
+	<div class="title">
+		Stock Manager
+	</div>
+    <div class="buttonContainer">
+    	<div class="leftButton">
+    	    <a href="./login" class="button"><div id="currentUser"></div></a>
+    	</div>
+    	<div class="rightButton">
+    		<a href="./logout" class="button">Logout</a>
+    	</div>
+    </div>
+    <br><br>
+    <div class="navbar">
+    	<div class="navElement"><a class="button navButton" href="./portfolio">Portfolio</a></div>
+    	<div class="navElement"><a class="button navButton" href="./transactions">Transactions</a></div>
+    	<div class="navElement"><a class="button navButton" href="./watchlists">Watch Lists</a></div>
+    	<div class="navElement"><a class="button navButton" href="./research">Research</a></div>
+    	<div class="navElement"><a class="button navButton" href="./analyze">Analyze</a></div>
+    </div>
+    <div id="portFolioSummary">
+    <table hidden id="portfolioTable">
+        <thead class="topContainer">
+        <tr>            
+        	<th class="top">Actions</th>
+            <th class="companyName top">Company</th>
+            <th class="top">Symbol</th>
+            <th class="top">Type</th>
+            <th class="top">Date</th>
+            <th class="top">Shares</th>
+            <th class="top">Price</th>
+            <th class="top">Commission</th>
+            <th class="top">Notes</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    </div>
 </body>
 </html>
