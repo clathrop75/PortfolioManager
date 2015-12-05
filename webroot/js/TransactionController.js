@@ -59,7 +59,6 @@ $(document).ready(function () {
                     newTransaction: newTransaction
                 },
                 success: function (result) {
-                    debugger;
                     var actions = '<td class="action"><span class="editSpan"><a class="edit">Edit</a></span><a id="' + result[0].id + '" class="delete">-</a></td>';
                     var company = '<td class="company">' + result[0].companyName + '</td>';
                     var symbol = '<td class="symbol">' + newTransaction.symbol + '</td>';

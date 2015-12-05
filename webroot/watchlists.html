@@ -7,6 +7,7 @@
 	<script src="./webroot/jquery/tablesorter/jquery.tablesorter.js"></script> 
 	<script src="./webroot/js/watchListsController.js"></script>
 	<link rel="stylesheet" type="text/css" href="./webroot/css/main.css" />
+	<link rel="stylesheet" type="text/css" href="./webroot/css/watchlists.css" />
 </head>
 <body>
 	<div class="title">
@@ -28,24 +29,14 @@
     	<div class="navElement"><a class="button navButton" href="./research">Research</a></div>
     	<div class="navElement"><a class="button navButton" href="./analyze">Analyze</a></div>
     </div>
-    <div id="portFolioSummary">
-    <table hidden id="portfolioTable">
-        <thead class="topContainer">
-        <tr>            
-        	<th class="top">Actions</th>
-            <th class="companyName top">Company</th>
-            <th class="top">Symbol</th>
-            <th class="top">Type</th>
-            <th class="top">Date</th>
-            <th class="top">Shares</th>
-            <th class="top">Price</th>
-            <th class="top">Commission</th>
-            <th class="top">Notes</th>
-        </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+    <div class="addWatchlist">
+    	<form class="list">
+    		<input class ="input add" type="text" name="watchlist" value="" placeholder="Name" class="input">
+    		<a class="addButton" id="add">Add</a>
+    		<span id="watchlistName">Watchlist Name</span>
+    	</form>
+    </div>
+    <div id="watchlistTables">
     </div>
 </body>
 </html>
