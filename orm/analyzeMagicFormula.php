@@ -2,17 +2,17 @@
 class analyzeMagicFormula extends orm{
     private $combinedRank;
 	private $eyRank;
-	private $rocRank;
+	private $roaRank;
 	private $companyId;
 	private $companyName;
 	private $symbol;
 	private $earningsYield;
 	private $returnOnAssets;
 
-    private function __construct($combinedRank, $eyRank, $rocRank, $companyId, $companyName, $symbol, $earningsYield, $returnOnAssets){
+    private function __construct($combinedRank, $eyRank, $roaRank, $companyId, $companyName, $symbol, $earningsYield, $returnOnAssets){
         $this->combinedRank = $combinedRank;
         $this->eyRank = $eyRank;
-        $this->rocRank = $rocRank;
+        $this->roaRank = $roaRank;
 		$this->companyId = $companyId;
 		$this->companyName = $companyName;
         $this->symbol = $symbol;
@@ -30,7 +30,7 @@ class analyzeMagicFormula extends orm{
         $items = array();
 
         while($row = $result->fetch_assoc()){
-            $items[] = new analyzeMagicFormula($row['CombinedRank'], $row['EyRank'], $row['RocRank'], $row['CompanyId'], $row['CompanyName'], $row['Symbol'], $row['EarningsYield'], $row['ReturnOnAssets']);
+            $items[] = new analyzeMagicFormula($row['CombinedRank'], $row['EyRank'], $row['RoaRank'], $row['CompanyId'], $row['CompanyName'], $row['Symbol'], $row['EarningsYield'], $row['ReturnOnAssets']);
         }
 
         return $items;
@@ -46,7 +46,7 @@ class analyzeMagicFormula extends orm{
         $items = array();
 
         while($row = $result->fetch_assoc()){
-            $items[] = new analyzeMagicFormula($row['CombinedRank'], $row['EyRank'], $row['RocRank'], $row['CompanyId'], $row['CompanyName'], $row['Symbol'], $row['EarningsYield'], $row['ReturnOnAssets']);
+            $items[] = new analyzeMagicFormula($row['CombinedRank'], $row['EyRank'], $row['RoaRank'], $row['CompanyId'], $row['CompanyName'], $row['Symbol'], $row['EarningsYield'], $row['ReturnOnAssets']);
         }
 
         return $items;
@@ -60,8 +60,8 @@ class analyzeMagicFormula extends orm{
         return $this->eyRank;
     }
 
-    public function getRocRank(){
-        return $this->rocRank;
+    public function getRoaRank(){
+        return $this->roaRank;
     }
 
 	public function getCompanyId(){
@@ -80,8 +80,8 @@ class analyzeMagicFormula extends orm{
         return $this->earningsYield;
     }
 
-	public function getReturnOnCapital(){
-        return $this->returnOnCapital;
+	public function getReturnOnAssets(){
+        return $this->returnOnAssets;
     }
 }
 
