@@ -28,3 +28,11 @@ A better theme for Bootstrap than the default. It merely consists of two CSS fil
 ###DataTables
 A jQuery library for rendering a static HTML table as a gridview with paging, search and sorting.
 (https://www.datatables.net)
+
+###Twitter Typeahead
+A JavaScript library to provide search autocompletion.
+(http://twitter.github.io/typeahead.js)
+
+###D3.js
+A JavaScript library for data visualization
+(http://d3js.org/)
