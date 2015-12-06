@@ -14,7 +14,7 @@ class analyzeTrailingPe extends orm{
 
     public static function getList(){
         $db = new db;
-			$result = $db->query("SELECT k.CompanyId, c.CompanyName, c.Symbol, k.TrailingPe FROM keystats k INNER JOIN company c ON c.Id=k.CompanyId ORDER BY TrailingPe DESC LIMIT 50");
+			$result = $db->query("SELECT k.CompanyId, c.CompanyName, c.Symbol, k.TrailingPe FROM keystats k INNER JOIN company c ON c.Id=k.CompanyId ORDER BY TrailingPe DESC LIMIT 250");
 
         if($result->num_rows == 0){
             return 0;
@@ -43,5 +43,9 @@ class analyzeTrailingPe extends orm{
 	public function getTrailingPe(){
         return $this->trailingPe;
     }
+	
+	protected function update(){
+		//Does nothing required by abstract class orm
+	}
 }
 

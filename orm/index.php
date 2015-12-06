@@ -30,4 +30,12 @@
     require 'transaction.php';
     require 'auth.php';
     require 'company.php';
+	require 'analyzeEarningsYield.php';
+	require 'analyzeForwardPe.php';
+	require 'analyzeMagicFormula.php';
+	require 'analyzeReturnOnAssets.php';
+	require 'analyzeReturnOnEquity.php';
+	require 'analyzeTrailingPe.php';
+	require 'sector.php';
+	require 'industry.php';
 

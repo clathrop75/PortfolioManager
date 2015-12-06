@@ -22,4 +22,4 @@
     $router->get['/home'] = function(){
         readfile('./webroot/home.html');
         die();
-    };   
+    };

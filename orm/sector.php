@@ -1,6 +1,5 @@
 <?php
 class sector extends orm{
-    private $id;
     private $sector;
 
     private function __construct($id, $sector){
@@ -32,7 +31,7 @@ class sector extends orm{
         return new sector($result['Id'], $result['Sector']);
     }
 	
-	    public static function getAllSectors(){
+	public static function getAllSectors(){
         $db = new db;
         $result = $db->query("select * from Sector s ORDER BY s.Sector");
 
@@ -42,7 +41,7 @@ class sector extends orm{
         $sectors = array();
 
         while($row = $result->fetch_assoc()){
-            $sectors[] = new sectors($row['Id'], $row['Sector']);
+            $sectors[] = new sector($row['Id'], $row['Sector']);
         }
 
         return $sectors;
@@ -55,6 +54,9 @@ class sector extends orm{
     public function getSector(){
         return $this->sector;
     }
-
+	
+	protected function update(){
+		//Does nothing required by abstract class orm
+	}
 }
 

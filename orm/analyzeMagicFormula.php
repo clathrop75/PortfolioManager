@@ -83,5 +83,9 @@ class analyzeMagicFormula extends orm{
 	public function getReturnOnAssets(){
         return $this->returnOnAssets;
     }
+	
+	protected function update(){
+		//Does nothing required by abstract class orm
+	}
 }
 

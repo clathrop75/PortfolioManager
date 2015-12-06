@@ -133,7 +133,7 @@ BEGIN
 	(SELECT (@eyrownum:=@eyrownum+1) AS EyRank, CompanyId, EarningsYield FROM (SELECT @eyrownum:=0) AS r, KeyStats ORDER BY EarningsYield DESC) AS ey INNER JOIN
 	(SELECT (@roarownum:=@roarownum+1) AS RoaRank, CompanyId, ReturnOnAssets FROM (SELECT @roarownum:=0) AS r, KeyStats ORDER BY ReturnOnAssets DESC) AS roa
 	ON ey.CompanyId=roa.CompanyId INNER JOIN Company c ON c.Id=ey.CompanyId
-    ORDER BY CombinedRank;
+    ORDER BY CombinedRank LIMIT 250;
 END//
 
 CREATE PROCEDURE spGetMagicFormulaListHistory(varYear INT(6))

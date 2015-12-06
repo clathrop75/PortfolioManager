@@ -1,25 +1,22 @@
 <?php
 class industry extends orm{
-    private $id;
-    private $sectorId;
-	private $industry;
+    private $industry;
 
-    private function __construct($id, $sectorId, $industry){
+    private function __construct($id, $industry){
         $this->id = $id;
-        $this->sectorId = $sectorId;
-		$this->industry = $industry;
+        $this->industry = $industry;
     }
 
     public static function getById($id){
         $db = new db;
-        $result = $db->query("select * from Industry i where i.Id = '$id'");
+        $result = $db->query("select * from Sector s where s.Id = '$id'");
 
         if($result->num_rows == 0){
             return 0;
         }
         $result = $result->fetch_assoc();
 
-        return new industry($result['Id'], $result['SectorId'], $result['Industry']);
+        return new industry($result['Id'], $result['Industry']);
     }
 
     public static function getBySectorId($sectorId){
@@ -32,34 +29,38 @@ class industry extends orm{
         $industries = array();
 
         while($row = $result->fetch_assoc()){
-            $industries[] = new industry($row['Id'], $row['SectorId'], $result['Industry']);
+            $industries[] = new industry($row['Id'], $row['Industry']);
         }
 
         return $industries;
     }
 	
-	public static function getByIndustry($industry){
+	public static function getAllIndustries(){
         $db = new db;
-        $result = $db->query("select * from Industry i where i.Industry = '$industry'");
+        $result = $db->query("select * from Industry i ORDER BY i.Industry");
 
         if($result->num_rows == 0){
             return 0;
         }
-        $result = $result->fetch_assoc();
+        $industries = array();
 
-        return new industry($result['Id'], $result['SectorId'], $result['Industry']);
+        while($row = $result->fetch_assoc()){
+            $industries[] = new industry($row['Id'], $row['Industry']);
+        }
+
+        return $industries;
     }
 
     public function getId(){
         return $this->id;
     }
 
-    public function getSectorId(){
-        return $this->sectorId;
-    }
-
-	public function getIndustry(){
+    public function getIndustry(){
         return $this->industry;
     }
+	
+	protected function update(){
+		//Does nothing required by abstract class orm
+	}
 }
 
