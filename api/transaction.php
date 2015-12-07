@@ -8,6 +8,7 @@
             $company = company::getById($transaction->getCompanyId());
             $transactionArray[] = [
                 "id"          => $transaction->getId(),
+				"companyId"   => $transaction->getCompanyId(),
                 "companyName" => $company->getCompanyName(),
                 "symbol"      => $company->getSymbol(),
                 "type"        => $transaction->getTransactionType(),
@@ -36,8 +37,9 @@
 
         $newTransaction[] = [
             "id"          => $transaction->getId(),
-            "companyName" => $company->getCompanyName(),
-            "symbol"      => $company->getSymbol(),
+            "companyId"   => $transaction->getCompanyId(),
+			"companyName" => $company->getCompanyName(),
+			"symbol"      => $company->getSymbol(),
             "type"        => $transaction->getTransactionType(),
             "date"        => $transaction->getTransactionDate(),
             "shares"      => $transaction->getShares(),

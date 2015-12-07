@@ -20,16 +20,20 @@ class portfolio extends orm{
 		$this->returnPercent = $returnPercent;
     }
 
-    public static function getByUserIdPortfolio($userId){
+    public static function getByUserId($userId){
         $db = new db;
         $result = $db->query("CALL spGetPortfolioSummary('$userId')");
 
         if($result->num_rows == 0){
             return 0;
         }
-        $result = $result->fetch_assoc();
+		$items = array();
 
-        return new portfolio($result['Id'], $result['UserId'], $result['WatchListName']);
+        while($row = $result->fetch_assoc()){
+            $items[] = new portfolio($row['CompanyName'], $row['Symbol'], $row['LastTradePriceOnly'], $row['TotalShares'], $row['CostBasis'], $row['MarketValue'], $row['TotalGain'], $row['ReturnPct']);
+        }
+
+        return $items;
     }
 
     public function getCompanyName(){
@@ -63,4 +67,8 @@ class portfolio extends orm{
 	public function getReturnPercent(){
         return $this->returnPercent;
     }
+	
+	public function update(){
+		// does nothing
+	}
 }

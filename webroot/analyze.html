@@ -3,7 +3,6 @@
   <head>
     <title>Stock Manager - Analyze</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<!--<script src="./webroot/jquery/tablesorter/jquery.tablesorter.js"></script>-->
 	<script src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
     <script src="./webroot/bootstrap/js/bootstrap.min.js"></script>
 	<script src="./webroot/bootstrap/js/typeahead.bundle.js"></script>
@@ -12,32 +11,9 @@
 	<link rel="stylesheet" type="text/css" href="./webroot/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="./webroot/css/custom.min.css">
 	<link rel="stylesheet" type="text/css" href="./webroot/bootstrap/css/typeahead-overrides.css">
-	<style></style>
-	<!--<link rel="stylesheet" type="text/css" href="./webroot/css/main.css" />-->
-	
-	<!--<link rel="stylesheet" type="text/css" href="./webroot/css/analyze.css" />-->
 </head>
 
 <body>
-	<!--<div class="title">
-		Analyze and Review Stocks
-	</div>
-    <div class="buttonContainer">
-    	<div class="leftButton">
-    	    <a href="./login" class="button"><div id="currentUser"></div></a>
-    	</div>
-    	<div class="rightButton">
-    		<a href="./home" class="button">Logout</a>
-    	</div>
-    </div>
-    <br><br>
-    <div class="navbar">
-    	<div class="navElement"><a class="button navButton" href="./portfolio">Portfolio</a></div>
-    	<div class="navElement"><a class="button navButton" href="./transactions">Transactions</a></div>
-    	<div class="navElement"><a class="button navButton" href="./watchlists">Watch Lists</a></div>
-    	<div class="navElement"><a class="button navButton" href="./research">Research</a></div>
-    	<div class="navElement"><a class="button navButton" href="./analyze">Analyze</a></div>
-    </div>-->
 	<div class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
@@ -53,13 +29,11 @@
 					<div id="prefetch" class="form-group">
 						<input id="textSymbol" type="text" class="form-control typeahead" placeholder="Research Companies">
 					</div>
-					<!--<button id="searchCompany" class="btn btn-default" type="button">Search</button>-->
 				</form>					
 				<ul class="nav navbar-nav">
 					<li><a href="./portfolio">Portfolio</a></li>
 					<li><a href="./transactions">Transactions</a></li>
 					<li><a href="./watchlists">Watch Lists</a></li>
-					<!--<li><a href="./research">Research</a></li>-->
 					<li class="active"><a href="./analyze">Analyze <span class="sr-only">(current)</span></a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
@@ -73,90 +47,12 @@
 		<div class="page-header" id="banner">
 			<div class="row">
 				<div class="col-lg-8 col-md-7 col-sm-6">
-					<h1>Analyze</h1>
+					<h2>Analyze</h2>
 					<p class="lead">Review stocks ranked by key metrics</p>
 				</div>
 			</div>
 		</div>
 		<div id="analysis">
-			<form id="analysis_form">
-				<!--<table>
-				  <tr>
-					<td class="label">Year Ending:</td>
-					<td class="value">
-					  <select id="year">
-						<option value="current">Most Recent</option>
-						<option value="2014">2014</option>
-						<option value="2013">2013</option>
-						<option value="2013">2012</option>
-					  </select>
-					</td>
-				  </tr>
-				  <tr>
-					<td class="label">Ranking Formula:</td>
-					<td class="value">
-					  <select id="formula">
-						<option value="magicformula">Magic Formula</option>
-						<option value="returnonassets">Return on Assets</option>
-						<option value="returnonequity">Return on Equity</option>
-						<option value="earningsyield">Earnings Yield</option>
-						<option value="trailingpe">Trailing P/E</option>
-						<option value="forwardpe">Forward P/E</option>
-					  </select>
-					</td>
-				  </tr>
-				  <tr>
-					<td class="label">Sector:</td>
-					<td class="value">
-					  <select id="sector">
-						<option value="0">All</option>
-					  </select>
-					</td>
-				  </tr>
-				  <tr>
-					<td class="label">Industry:</td>
-					<td class="value">
-					  <select id="industry">
-						<option value="0">All</option>
-					  </select>
-					</td>
-				  </tr>
-				  <tr><td colspan="2"><a class="searchButton" id="search">Search</a></td></tr>
-				</table>
-			</form>-->
-			<!--<form class="form-inline" role="form">
-				<div class="form-group">
-				  <label for="formula" class="col-lg-2 control-label">Formula</label>
-				  <div class="col-lg-10">
-					<select id="formula" class="form-control">
-					  <option value="magicformula">Magic Formula</option>
-					  <option value="returnonassets">Return on Assets</option>
-					  <option value="returnonequity">Return on Equity</option>
-					  <option value="earningsyield">Earnings Yield</option>
-					  <option value="trailingpe">Trailing P/E</option>
-					  <option value="forwardpe">Forward P/E</option>
-					</select>
-				  </div>
-				  <button id="search" type="submit" class="btn btn-primary">Search</button>
-				</div>
-			</form>-->
-			<!--<div class="form-group">
-					<label class="control-label">Select Formula</label>
-					<div class="input-group">
-						<select id="formula" class="form-control">
-							<option value="magicformula">Magic Formula</option>
-							<option value="returnonassets">Return on Assets</option>
-							<option value="returnonequity">Return on Equity</option>
-							<option value="earningsyield">Earnings Yield</option>
-							<option value="trailingpe">Trailing P/E</option>
-							<option value="forwardpe">Forward P/E</option>
-						</select>
-						<span class="input-group-btn">
-							<button id="search" class="btn btn-default" type="button">Search</button>
-						</span>
-					</div>
-				</div>
-			</div>-->
 			<div class="btn-group btn-group-justified">
 				<a id="btnMF" href="#" class="btn btn-primary">Magic Formula</a>
 				<a id="btnROA" href="#" class="btn btn-default">Return On Assets</a>

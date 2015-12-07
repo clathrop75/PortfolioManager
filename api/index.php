@@ -10,6 +10,7 @@ require 'analyze.php';
 require 'sector.php';
 require 'industry.php';
 require 'company.php';
+require 'portfolio.php';
 require 'history.php';
 
 //mock api

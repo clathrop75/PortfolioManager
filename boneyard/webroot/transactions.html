@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Transactions</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="./webroot/jquery/tablesorter/jquery.tablesorter.js"></script> 
+	<script src="./webroot/jquery/jQuery-Autocomplete/dist/jquery.autocomplete.min.js"></script> 
+    <script src="./webroot/js/TransactionController.js"></script>
+	<link rel="stylesheet" type="text/css" href="./webroot/css/main.css" />
+	<link rel="stylesheet" type="text/css" href="./webroot/css/transactions.css" />
+</head>
+<body>
+	<div class="title">
+		Stock Manager
+	</div>
+    <div class="buttonContainer">
+    	<div class="leftButton">
+    	    <a href="./login" class="button"><div id="currentUser"></div></a>
+    	</div>
+    	<div class="rightButton">
+    		<a href="./logout" class="button">Logout</a>
+    	</div>
+    </div>
+    <br><br>
+    <div class="navbar">
+    	<div class="navElement"><a class="button navButton" href="./portfolio">Portfolio</a></div>
+    	<div class="navElement"><a class="button navButton" href="./transactions">Transactions</a></div>
+    	<div class="navElement"><a class="button navButton" href="./watchlists">Watch Lists</a></div>
+    	<div class="navElement"><a class="button navButton" href="./research">Research</a></div>
+    	<div class="navElement"><a class="button navButton" href="./analyze">Analyze</a></div>
+    </div>
+    <div class="addTransaction">
+    	<form class ="addForm">
+    		<input class ="input add" type="text" name="symbol" value="" placeholder="Symbol" class="input">
+			<select id="type" class="add">
+  				<option value="1">Buy</option>
+  				<option value="0">Sell</option>   
+  			</select>		
+  			<input class="add" type="date" name="date">    		
+  			<input class ="input add" type="text" name="shares" value="" placeholder="Shares" class="input">
+    		<input class ="input add" type="text" name="price" value="" placeholder="Price" class="input">
+    		<input class ="input add" type="text" name="commission" value="" placeholder="Commission" class="input">
+    		<input class ="input add" type="text" name="notes" value="" placeholder="Notes" class="input">
+    		<a class="addButton" id="add">Add</a>
+    	</form>
+    </div>
+    <div id="portFolioSummary">
+    <table hidden id="portfolioTable">
+        <thead class="topContainer">
+        <tr>            
+        	<th class="top">Actions</th>
+            <th class="companyName top">Company</th>
+            <th class="top">Symbol</th>
+            <th class="top">Type</th>
+            <th class="top">Date</th>
+            <th class="top">Shares</th>
+            <th class="top">Price</th>
+            <th class="top">Commission</th>
+            <th class="top">Notes</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    </div>
+</body>
+</html>

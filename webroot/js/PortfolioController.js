@@ -1,74 +1,72 @@
+var symbolList = [];
+
 $(document).ready(function() {
 
-    function round(value, decimals) {
-        return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
-    }
-
-    $.ajax("http://localhost:8888/user",
+    $.ajax("/user",
         {type: "GET",
             dataType: "json",
             success: function(user){
                 $('#currentUser').text("Hi " + user.firstName);
             }
     });
+	
+	$.ajax("/symbol", {
+		type: "GET",
+        dataType: "json",
+        success: function(symbols){
+			symbolList = symbols;
+        }
+    });
+	
+	var symbols = new Bloodhound({
+	  datumTokenizer: Bloodhound.tokenizers.whitespace,
+	  queryTokenizer: Bloodhound.tokenizers.whitespace,
+	  prefetch: '/symbols'
+	});
 
-
-
-    $.ajax("http://localhost:8888/transaction",
-        {type: "GET",
-            dataType: "json",
-            success: function(transactions){
-                var companies = Array();
-                for(var i = 0; i < transactions.length; i++){
-                    var name = transactions[i].companyName;
-                    if(companies.indexOf(name) == -1){
-                        companies.push(name);
-                    }
-                }
-
-                var portfolioSummary = Array();
-
-                for(i = 0; i < companies.length; i++){
-                    var totalShares = 0;
-                    var companyTransactions = transactions.filter(function(transaction){
-                        return (transaction.companyName == companies[i]);
-                    });
-
-                    for(var j = 0; j < companyTransactions.length; j++){
-                        if(companyTransactions[j].type == '1'){
-                            totalShares += parseFloat(companyTransactions[j].shares);
-                        } else {
-                            totalShares -= parseFloat(companyTransactions[j].shares);
-                        }
-                    }
-                    portfolioSummary.push({
-                        "company" : companyTransactions[i],
-                        "totalShares" : totalShares
-                    })
-                }
-
-                for(i = 0; i < portfolioSummary.length; i++){
-                    (function(summary){
-                        $.ajax("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quote%20where%20symbol%20in%20(%22"+summary.company.symbol+"%22)&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=",{
-                            dataType: "json",
-                            data: { symbol : summary.company.symbol},
-                            success: function(quote){
-                                $info = quote.query.results.quote;
-                                var companyName = '<td class="companyName">'+ summary.company.companyName +'</div>';
-                                var totalShares = '<td class="totalShares">'+ round(summary.totalShares, 2) +'</td>';
-                                var open = '<td class="openPrice">'+ $info.DaysRange +'</td>';
-                                var lastPrice = '<td class="lastPrice">'+ round($info.LastTradePriceOnly, 2) +'</td>';
-                                var currentValue = '<td class="currentValue">' + round($info.LastTradePriceOnly * summary.totalShares, 2) + '</td>';
-                                $("tbody").append('<tr class="summaryContainer">' + companyName + totalShares + open + lastPrice + currentValue + "</tr>");
-                            }
-                         })
-                    }(portfolioSummary[i]));
-                }
-            }
-        });
+	$('#prefetch .typeahead').typeahead(null, {
+	  name: 'symbols',
+	  source: symbols
+	});
+	
+	$('.typeahead').on('typeahead:selected', function(event, symbol) {
+		window.location.href = "/company?id=" + getIdFromSymbol(symbol);
+	});
+	
+	getPortfolioData();
 });
 
-$(document).ajaxStop(function(){
-	$("#portfolioTable").tablesorter();
-	$("#portfolioTable").removeAttr("hidden");
-});
+function round(value, decimals) {
+    return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+}
+
+function getIdFromSymbol(symbol) {
+	for (var i=0; i<symbolList.length; i++) {
+		if (symbolList[i].symbol == symbol)
+			return symbolList[i].id;
+	}
+}
+
+function getPortfolioData() {
+	var html = "<table id='portfolio' class='display' cellspacing='0'><thead><tr><th>Company</th><th>Symbol</th><th class='formatRight'>Last Price</th><th class='formatRight'>Shares</th><th class='formatRight'>Cost Basis</th><th class='formatRight'>Market Value</th><th class='formatRight'>Gain</th><th class='formatRight'>Return</th></tr></thead><tbody>";
+	$.ajax("/summary", {
+		type: "GET",
+		datatype: "json",
+		success: function(results) {
+			for(var i = 0; i < results.length; i++) {
+				html += "<tr><td>" + results[i].companyName + "</td>";
+				html += "<td><a href='/company?id=" + results[i].companyId + "'>" + results[i].symbol + "</a></td>";
+				html += "<td class='formatRight'>$" + parseFloat(results[i].lastTradePriceOnly).toFixed(2) + "</td>";
+				html += "<td class='formatRight'>" + parseFloat(results[i].totalShares).toFixed(3) + "</td>";
+				html += "<td class='formatRight'>$" + parseFloat(results[i].costBasis).toFixed(2) + "</td>";
+				html += "<td class='formatRight'>$" + parseFloat(results[i].marketValue).toFixed(2) + "</td>";
+				html += "<td class='formatRight'>$" + parseFloat(results[i].totalGain).toFixed(2) + "</td>";
+				html += "<td class='formatRight'>" + parseFloat(results[i].returnPercent).toFixed(2) + "%</td></tr>";
+			}
+			html += "</tbody></table>";
+			$("#results").html(html);
+			$("#portfolio").DataTable();
+			$(".formatRight").css("text-align", "right");
+		}
+	});
+}

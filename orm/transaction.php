@@ -1,6 +1,5 @@
 <?php
-class transaction extends orm
-{
+class transaction extends orm{
     private $companyId;
     private $userId;
     private $transactionType;
