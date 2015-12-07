@@ -2,7 +2,7 @@ var symbolList = [];
 
 $(document).ready(function() {
 
-    $.ajax("http://localhost/user",
+    $.ajax("/user",
         {type: "GET",
             dataType: "json",
             success: function(user){
@@ -10,7 +10,7 @@ $(document).ready(function() {
             }
     });
 	
-	$.ajax("http://localhost/symbol", {
+	$.ajax("/symbol", {
 		type: "GET",
         dataType: "json",
         success: function(symbols){
@@ -21,7 +21,7 @@ $(document).ready(function() {
 	var symbols = new Bloodhound({
 	  datumTokenizer: Bloodhound.tokenizers.whitespace,
 	  queryTokenizer: Bloodhound.tokenizers.whitespace,
-	  prefetch: 'http://localhost/symbols'
+	  prefetch: '/symbols'
 	});
 
 	$('#prefetch .typeahead').typeahead(null, {
@@ -181,7 +181,7 @@ function getIdFromSymbol(symbol) {
 
 function getMfData() {
 	var html = "<table id='stockRank' class='display' cellspacing='0'><thead><tr><th>Rank</th><th>Score</th><th>Company</th><th>Symbol</th><th>Earnings Yield</th><th>Return on Assets</th></tr></thead><tbody>";
-	$.ajax("http://localhost/analyze/magicformula", {
+	$.ajax("/analyze/magicformula", {
 		type: "GET",
 		datatype: "json",
 		success: function(results) {
@@ -202,7 +202,7 @@ function getMfData() {
 
 function getRoaData() {
 	var html = "<table id='stockRank' class='display' cellspacing='0'><thead><tr><th>Rank</th><th>Company</th><th>Symbol</th><th>Return on Assets</th></tr></thead></tbody>";
-	$.ajax("http://localhost/analyze/returnonassets", {
+	$.ajax("/analyze/returnonassets", {
 		type: "GET",
 		datatype: "json",
 		success: function(results) {
@@ -223,7 +223,7 @@ function getRoaData() {
 
 function getRoeData() {
 	var html = "<table id='stockRank' class='display' cellspacing='0'><thead><tr><th>Rank</th><th>Company</th><th>Symbol</th><th>Return on Equity</th></tr></thead></tbody>";
-	$.ajax("http://localhost/analyze/returnonequity", {
+	$.ajax("/analyze/returnonequity", {
 		type: "GET",
 		datatype: "json",
 		success: function(results) {
@@ -244,7 +244,7 @@ function getRoeData() {
 
 function getEyData() {
 	var html = "<table id='stockRank' class='display' cellspacing='0'><thead><tr><th>Rank</th><th>Company</th><th>Symbol</th><th>Earnings Yield</th></tr></thead></tbody>";
-	$.ajax("http://localhost/analyze/earningsyield", {
+	$.ajax("/analyze/earningsyield", {
 		type: "GET",
 		datatype: "json",
 		success: function(results) {
@@ -265,7 +265,7 @@ function getEyData() {
 
 function getTpeData() {
 	var html = "<table id='stockRank' class='display' cellspacing='0'><thead><tr><th>Rank</th><th>Company</th><th>Symbol</th><th>Trailing P/E</th></tr></thead></tbody>";
-	$.ajax("http://localhost/analyze/trailingpe", {
+	$.ajax("/analyze/trailingpe", {
 		type: "GET",
 		datatype: "json",
 		success: function(results) {
@@ -286,7 +286,7 @@ function getTpeData() {
 
 function getFpeData() {
 	var html = "<table id='stockRank' class='display' cellspacing='0'><thead><tr><th>Rank</th><th>Company</th><th>Symbol</th><th>Forward P/E</th></tr></thead></tbody>";
-	$.ajax("http://localhost/analyze/forwardpe", {
+	$.ajax("/analyze/forwardpe", {
 		type: "GET",
 		datatype: "json",
 		success: function(results) {
