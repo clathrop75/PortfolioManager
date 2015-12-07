@@ -31,6 +31,9 @@ class user extends orm{
         $result = $db->query("select * from user u where u.Email = '$login'");
 
         if($result->num_rows == 0){
+            $result = $db->query("select * from user u where u.Username = '$login'");
+        }
+        if($result->num_rows == 0){
             return 0;
         }
         $result = $result->fetch_assoc();
