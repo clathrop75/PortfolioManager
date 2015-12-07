@@ -1,24 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="./webroot/css/home.css" />
-    <title></title>
+    <meta charset="UTF-8">    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="./webroot/bootstrap/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="./webroot/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="./webroot/css/custom.min.css">
+	<link rel="stylesheet" type="text/css" href="./webroot/bootstrap/css/typeahead-overrides.css">    
+	<title>Stock Manager</title>
 </head>
 <body>
-    <div class="buttonContainer">
-    	<div class="leftButton">
-    	    <a href="./login" class="button">Sign In</a>
-    	</div>
-    	<div class="rightButton">
-    		<a href="./signup" class="button">Register</a>
-    	</div>
-    </div>
-    <div class="title">
-    	Stock Manager
-    </div>
-    <div class="about">
-    	About Us: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum imperdiet tellus turpis, vel ullamcorper lacus pellentesque a. Morbi vehicula metus nec eros ultrices, at aliquam massa ornare. Praesent feugiat sit amet libero quis imperdiet. Integer in risus at augue bibendum consequat. Etiam rutrum neque ut luctus molestie. Praesent ut justo a metus tempor fringilla sed at est. Nullam porta dignissim turpis eu fringilla. Vivamus dolor mi, ornare eget eros eu, suscipit lobortis turpis. In eu nulla nec nunc ornare suscipit.
-    </div>
+	<div class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/">Stock Manager</a>
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-main">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="collapse navbar-collapse" id="navbar-main">
+				<form class="navbar-form navbar-left" role="search">
+					<div id="prefetch" class="form-group">
+						<input id="textSymbol" type="text" class="form-control typeahead" placeholder="Research Companies">
+					</div>
+				</form>					
+				<ul class="nav navbar-nav">
+					<li><a href="./portfolio">Portfolio</a></li>
+					<li><a href="./transactions">Transactions</a></li>
+					<li><a href="./watchlists">Watch Lists</a></li>
+					<li class="./analyze"><a href="./analyze">Analyze<span class="sr-only">(current)</span></a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="./login">Sign In</a></li>
+					<li><a href="./home">Logout</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class = "container" id="content">
+		<div class="page-header" id="banner">
+			<div class="row">
+				<div class="col-lg-8 col-md-7 col-sm-6">
+					<h1 class="text-right page-header">Stock Manager</h1>
+					<p class="lead">About Us:</p>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum imperdiet tellus turpis, vel ullamcorper lacus pellentesque a. Morbi vehicula metus nec eros ultrices, at aliquam massa ornare. Praesent feugiat sit amet libero quis imperdiet. Integer in risus at augue bibendum consequat. Etiam rutrum neque ut luctus molestie. Praesent ut justo a metus tempor fringilla sed at est. Nullam porta dignissim turpis eu fringilla. Vivamus dolor mi, ornare eget eros eu, suscipit lobortis turpis. In eu nulla nec nunc ornare suscipit.</p>
+				</div>
+			</div>
+		</div>	
 </body>
 </html>
