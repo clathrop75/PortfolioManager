@@ -33,6 +33,6 @@ A jQuery library for rendering a static HTML table as a gridview with paging, se
 A JavaScript library to provide search autocompletion.
 (http://twitter.github.io/typeahead.js)
 
-###D3.js
+###Highcharts
 A JavaScript library for data visualization
-(http://d3js.org/)
+(http://www.highcharts.com/)
