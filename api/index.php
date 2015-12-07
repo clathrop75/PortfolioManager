@@ -12,6 +12,7 @@ require 'industry.php';
 require 'company.php';
 require 'portfolio.php';
 require 'history.php';
+require 'usersettings.php';
 
 //mock api
 require 'mock.php';

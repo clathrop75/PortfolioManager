@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="./webroot/css/settings.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="./webroot/js/settings.js"></script>
+    <title>User Settings</title>
+</head>
+<body>
+
+User Settings<br>
+<div class='userinfo'></div>
+	 <form method="post" action="/usersettings" id='myForm'>
+  First Name: <input type="text" name="fname"><br>
+  Last Name: <input type="text" name="lname"><br>
+  Email Address: <input type="text" name="email"><br>
+  Password: <input type="password" name="oldpass" autofocus><br>
+  New Password: <input type="password" name="newpass" placeholder = 'Optional'><br>
+  <input type="submit" value="Update Info">
+</form> 
+</body>
+
+</html>

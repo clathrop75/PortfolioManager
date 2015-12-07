@@ -23,3 +23,7 @@
         readfile('./webroot/home.html');
         die();
     };
+    $router->get['/settings'] = function(){
+        readfile('./webroot/settings.html');
+        die();
+    };
