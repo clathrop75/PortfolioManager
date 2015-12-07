@@ -34,3 +34,21 @@
         print json_encode($watchLists);
         die();
     };
+    $router->post['/watchlist'] = function() {
+
+        $u = $GLOBALS['USER'];
+        $toUpdate = $_POST['watchlist'];
+
+        $existing_watchlists = watchList::getByUserId($u->getId());
+
+        foreach($existing_watchlists as $existing_watchlist) {
+            if($existing_watchlist->getWatchListName() == $toUpdate){
+                $id = $existing_watchlist->getId();
+                $company = company::getBySymbol($_POST['toAdd']);
+                watchListItem::create($id,$company,'');
+                die();
+            }
+        }
+        watchList::create($u->getId(),$toUpdate);
+        die();
+    };
