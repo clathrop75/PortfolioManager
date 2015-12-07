@@ -52,3 +52,9 @@
         watchList::create($u->getId(),$toUpdate);
         die();
     };
+    $router->delete['/watchlist/#listid'] = function(){
+
+    };
+    $router->delete['/watchlist/#listid/#itemid'] = function (){
+
+    };
