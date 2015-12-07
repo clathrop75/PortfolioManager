@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Stock Manager - Research Companies</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+    <script src="./webroot/bootstrap/js/bootstrap.min.js"></script>
+	<script src="./webroot/bootstrap/js/typeahead.bundle.js"></script>
+	<script src="https://code.highcharts.com/stock/highstock.js"></script>
+	<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+	<script src="./webroot/js/CompanyController.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css" />
+	<link rel="stylesheet" type="text/css" href="./webroot/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="./webroot/css/custom.min.css">
+	<link rel="stylesheet" type="text/css" href="./webroot/bootstrap/css/typeahead-overrides.css">
+	<link rel="stylesheet" type="text/css" href="./webroot/css/company.css">
+</head>
+
+<body>
+	<div class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Stock Manager</a>
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-main">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="collapse navbar-collapse" id="navbar-main">
+				<form class="navbar-form navbar-left" role="search">
+					<div id="prefetch" class="form-group">
+						<input id="textSymbol" type="text" class="form-control typeahead" placeholder="Research Companies">
+					</div>
+				</form>					
+				<ul class="nav navbar-nav">
+					<li><a href="./portfolio">Portfolio</a></li>
+					<li><a href="./transactions">Transactions</a></li>
+					<li><a href="./watchlists">Watch Lists</a></li>
+					<li><a href="./analyze">Analyze <span class="sr-only">(current)</span></a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="./login"><div id="currentUser"></div></a></li>
+					<li><a href="./home">Logout</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class = "container" id="content">
+		<div class="page-header" id="banner">
+			<div class="row">
+				<div class="col-lg-8 col-md-7 col-sm-6">
+					<h2 id="header"></h2>
+					<p id="lead" class="lead"></p>
+				</div>
+			</div>
+		</div>
+		<div>
+		<div id="summary" class="panel panel-default">
+			<div class="panel-body">
+		<table width="100%">
+			<tr><td><b>Day Change: </b></td><td id="dayChange"></td><td><b>Sector: </b></td><td id="sector"></td><td><b>Volume: </b></td><td id="volume"></td><td><b>Days High: </b></td><td id="daysHigh"></td><td><b>Year High: </b></td><td id="yearHigh"></td></tr>
+			<tr><td><b>Market Cap: </b></td><td id="marketCapitalization"></td><td><b>Industry: </b></td><td id="industry"></td><td><b>Avg Volume: </b></td><td id="averageDailyVolume"></td><td><b>Days Low: </b></td><td id="daysLow"></td><td><b>Year Low: </b></td><td id="yearLow"></td></tr>
+		</table>
+			</div>
+		</div>
+		<div class="vert-space-15">
+		</div>
+		<div id="chart">
+		</div>
+	</div>
+</body>
+
+</html>

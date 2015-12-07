@@ -30,6 +30,8 @@
     require 'transaction.php';
     require 'auth.php';
     require 'company.php';
+	require 'history.php';
+	require 'symbol.php';
 	require 'analyzeEarningsYield.php';
 	require 'analyzeForwardPe.php';
 	require 'analyzeMagicFormula.php';

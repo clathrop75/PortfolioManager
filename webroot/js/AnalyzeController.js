@@ -1,3 +1,5 @@
+var symbolList = [];
+
 $(document).ready(function() {
 
     $.ajax("http://localhost/user",
@@ -8,21 +10,28 @@ $(document).ready(function() {
             }
     });
 	
-	/*$.ajax("http://localhost/sector", {
+	$.ajax("http://localhost/symbol", {
 		type: "GET",
         dataType: "json",
-        success: function(sectors){
-			for(var i = 0; i < sectors.length; i++){
-				var id = sectors[i].id;
-                var sector = sectors[i].sector;
-                $("#sector").append($("<option></option>").attr("value",id).text(sector));
-            }
+        success: function(symbols){
+			symbolList = symbols;
         }
-    });*/
-
-    $("#search").on('click', function(e){
-    	getStockData();
     });
+	
+	var symbols = new Bloodhound({
+	  datumTokenizer: Bloodhound.tokenizers.whitespace,
+	  queryTokenizer: Bloodhound.tokenizers.whitespace,
+	  prefetch: 'http://localhost/symbols'
+	});
+
+	$('#prefetch .typeahead').typeahead(null, {
+	  name: 'symbols',
+	  source: symbols
+	});
+	
+	$('.typeahead').on('typeahead:selected', function(event, symbol) {
+		window.location.href = "/company?id=" + getIdFromSymbol(symbol);
+	});
 	
 	$("#btnMF").on('click', function(e){
 		$("#btnMF").addClass("btn-primary");
@@ -163,6 +172,13 @@ function round(value, decimals) {
     return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
 }
 
+function getIdFromSymbol(symbol) {
+	for (var i=0; i<symbolList.length; i++) {
+		if (symbolList[i].symbol == symbol)
+			return symbolList[i].id;
+	}
+}
+
 function getMfData() {
 	var html = "<table id='stockRank' class='display' cellspacing='0'><thead><tr><th>Rank</th><th>Score</th><th>Company</th><th>Symbol</th><th>Earnings Yield</th><th>Return on Assets</th></tr></thead><tbody>";
 	$.ajax("http://localhost/analyze/magicformula", {
@@ -173,17 +189,9 @@ function getMfData() {
 				html += "<tr><td>" + (i+1) + "</td>"
 				html += "<td>" + results[i].combinedRank + "</td>";
 				html += "<td>" + results[i].companyName + "</td>";
-				html += "<td><a href='/company/" + results[i].companyId + "'>" + results[i].symbol + "</a></td>";
+				html += "<td><a href='/company?id=" + results[i].companyId + "'>" + results[i].symbol + "</a></td>";
 				html += "<td>" + results[i].earningsYield + "</td>";
 				html += "<td>" + results[i].returnOnAssets + "</td></tr>";
-				
-				/*var rank = "<td>" + (i+1) + "</td>";
-				var score = "<td>" + results[i].combinedRank + "</td>";
-				var company = "<td>" + results[i].companyName + "</td>";
-				var symbol = "<td><a href='/company/" + results[i].companyId + "'>" + results[i].symbol + "</a></td>";
-				var earningsYield = "<td>" + results[i].earningsYield + "</td><td>" + results[i].returnOnAssets + "</td>";
-
-				html += "<tr>" + rank + company + symbol + data + "</tr>";*/
 			}
 			html += "</tbody></table>";
 			$("#results").html(html);
@@ -201,7 +209,7 @@ function getRoaData() {
 			for(var i = 0; i < results.length; i++) {
 				var rank = "<td>" + (i+1) + "</td>";
 				var company = "<td>" + results[i].companyName + "</td>";
-				var symbol = "<td><a href='/company/" + results[i].companyId + "'>" + results[i].symbol + "</a></td>";
+				var symbol = "<td><a href='/company?id=" + results[i].companyId + "'>" + results[i].symbol + "</a></td>";
 				var data = "<td>" + results[i].returnOnAssets + "</td>";
 				
 				html += "<tr>" + rank + company + symbol + data + "</tr>";
@@ -222,7 +230,7 @@ function getRoeData() {
 			for(var i = 0; i < results.length; i++) {
 				var rank = "<td>" + (i+1) + "</td>";
 				var company = "<td>" + results[i].companyName + "</td>";
-				var symbol = "<td><a href='/company/" + results[i].companyId + "'>" + results[i].symbol + "</a></td>";
+				var symbol = "<td><a href='/company?id=" + results[i].companyId + "'>" + results[i].symbol + "</a></td>";
 				var data = "<td>" + results[i].returnOnEquity + "</td>";
 				
 				html += "<tr>" + rank + company + symbol + data + "</tr>";
@@ -243,7 +251,7 @@ function getEyData() {
 			for(var i = 0; i < results.length; i++) {
 				var rank = "<td>" + (i+1) + "</td>";
 				var company = "<td>" + results[i].companyName + "</td>";
-				var symbol = "<td><a href='/company/" + results[i].companyId + "'>" + results[i].symbol + "</a></td>";
+				var symbol = "<td><a href='/company?id=" + results[i].companyId + "'>" + results[i].symbol + "</a></td>";
 				var data = "<td>" + results[i].earningsYield + "</td>";
 				
 				html += "<tr>" + rank + company + symbol + data + "</tr>";
@@ -264,7 +272,7 @@ function getTpeData() {
 			for(var i = 0; i < results.length; i++) {
 				var rank = "<td>" + (i+1) + "</td>";
 				var company = "<td>" + results[i].companyName + "</td>";
-				var symbol = "<td><a href='/company/" + results[i].companyId + "'>" + results[i].symbol + "</a></td>";
+				var symbol = "<td><a href='/company?id=" + results[i].companyId + "'>" + results[i].symbol + "</a></td>";
 				var data = "<td>" + results[i].trailingPe + "</td>";
 				
 				html += "<tr>" + rank + company + symbol + data + "</tr>";
@@ -285,7 +293,7 @@ function getFpeData() {
 			for(var i = 0; i < results.length; i++) {
 				var rank = "<td>" + (i+1) + "</td>";
 				var company = "<td>" + results[i].companyName + "</td>";
-				var symbol = "<td><a href='/company/" + results[i].companyId + "'>" + results[i].symbol + "</a></td>";
+				var symbol = "<td><a href='/company?id=" + results[i].companyId + "'>" + results[i].symbol + "</a></td>";
 				var data = "<td>" + results[i].forwardPe + "</td>";
 				
 				html += "<tr>" + rank + company + symbol + data + "</tr>";

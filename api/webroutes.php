@@ -11,8 +11,8 @@
         readfile('./webroot/watchlists.html');
         die();
     };    
-    $router->get['/research'] = function(){
-        readfile('./webroot/research.html');
+    $router->get['/company'] = function(){
+        readfile('./webroot/company.html');
         die();
     };    
     $router->get['/analyze'] = function(){

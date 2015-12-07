@@ -1,6 +1,5 @@
 <?php
-class company{
-    private $id;
+class company extends orm{
     private $symbol;
 	private $sector;
 	private $industry;
@@ -42,14 +41,14 @@ class company{
 
     public static function getById($id){
         $db = new db;
-        $result = $db->query("select * from company c LEFT JOIN sector s ON s.Id=c.SectorId LEFT JOIN industry i ON i.Id=c.IndustryId where c.id ='$id'");
+        $result = $db->query("select c.Id, c.Symbol, s.Sector, i.Industry, c.AverageDailyVolume, c.DayChange, c.DaysLow, c.DaysHigh, c.YearLow, c.YearHigh, c.MarketCapitalization, c.LastTradePriceOnly, c.CompanyName, c.Volume, c.StockExchange, c.LastUpdated, c.Active from company c LEFT JOIN sector s ON s.Id=c.SectorId LEFT JOIN industry i ON i.Id=c.IndustryId where c.id ='$id'");
 
         if($result->num_rows == 0){
             return 0;
         }
         $result = $result->fetch_assoc();
 
-        return new company("$id", $result['Symbol'], $result['Sector'], $result['Industry'], $result['AverageDailyVolume'], $result['DayChange'], $result['DaysLow'], $result['DaysHigh'], $result['YearLow'], $result['YearHigh'], $result['MarketCapitalization'], $result['LastTradePriceOnly'], $result['CompanyName'], $result['Volume'], $result['StockExchange'], $result['LastUpdated'], $result['Active']);
+        return new company($result['Id'], $result['Symbol'], $result['Sector'], $result['Industry'], $result['AverageDailyVolume'], $result['DayChange'], $result['DaysLow'], $result['DaysHigh'], $result['YearLow'], $result['YearHigh'], $result['MarketCapitalization'], $result['LastTradePriceOnly'], $result['CompanyName'], $result['Volume'], $result['StockExchange'], $result['LastUpdated'], $result['Active']);
     }
 
     public static function getBySymbol($symbol){
@@ -131,5 +130,8 @@ class company{
     }
     public function getActive(){
         return $this->active;
+    }
+	public function update(){
+        // does nothing
     }
 }

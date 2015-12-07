@@ -6,10 +6,12 @@
 	<!--<script src="./webroot/jquery/tablesorter/jquery.tablesorter.js"></script>-->
 	<script src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
     <script src="./webroot/bootstrap/js/bootstrap.min.js"></script>
+	<script src="./webroot/bootstrap/js/typeahead.bundle.js"></script>
 	<script src="./webroot/js/AnalyzeController.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css" />
 	<link rel="stylesheet" type="text/css" href="./webroot/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="./webroot/css/custom.min.css">
+	<link rel="stylesheet" type="text/css" href="./webroot/bootstrap/css/typeahead-overrides.css">
 	<style></style>
 	<!--<link rel="stylesheet" type="text/css" href="./webroot/css/main.css" />-->
 	
@@ -47,11 +49,17 @@
 				</button>
 			</div>
 			<div class="collapse navbar-collapse" id="navbar-main">
+				<form class="navbar-form navbar-left" role="search">
+					<div id="prefetch" class="form-group">
+						<input id="textSymbol" type="text" class="form-control typeahead" placeholder="Research Companies">
+					</div>
+					<!--<button id="searchCompany" class="btn btn-default" type="button">Search</button>-->
+				</form>					
 				<ul class="nav navbar-nav">
 					<li><a href="./portfolio">Portfolio</a></li>
 					<li><a href="./transactions">Transactions</a></li>
 					<li><a href="./watchlists">Watch Lists</a></li>
-					<li><a href="./research">Research</a></li>
+					<!--<li><a href="./research">Research</a></li>-->
 					<li class="active"><a href="./analyze">Analyze <span class="sr-only">(current)</span></a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">

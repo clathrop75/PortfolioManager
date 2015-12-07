@@ -18,15 +18,10 @@
 	$router->get['/industry'] = function(){
         $items = industry::getAllIndustries();
 		
-		foreach($items as $item){
-			$industryList[] = [
-				"id"     => $item->getId(),
-				"industry" => $item->getIndustry()
-			];
-		}
+
 
         header('Content-type: application/json');
         header("Access-Control-Allow-Origin: *");
-        print json_encode($industryList);
+        print json_encode($items);
         die();
     };
