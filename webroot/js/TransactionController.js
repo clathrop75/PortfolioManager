@@ -72,12 +72,7 @@ $(document).ready(function () {
         //get values from fields
         var newTransaction = {
             symbol: $("[name='symbol']").val(),
-            type: $("#type").val(),
-            date: $("[name='date']").val(),
-            shares: $("[name='shares']").val(),
-            price: $("[name='price']").val(),
-            commission: $("[name='commission']").val(),
-            notes: $("[name='notes']").val()
+            date: $("[name='list']").val()
         };
 
         $.ajax("/transaction",
