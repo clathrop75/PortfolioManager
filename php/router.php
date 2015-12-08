@@ -37,7 +37,7 @@ class router {
     }
 
     private function login(){
-        header('/login');
+        header('location: /login');
         die();
     }
 

@@ -22,6 +22,12 @@ class watchListItem extends orm{
         return $result;
     }
 
+    public static function deleteById($id){
+        $db = new db;
+        $result = $db->query("delete from watchlistitems where id = '$id'");
+        return $result;
+    }
+
     public static function getById($id){
         $db = new db;
         $result = $db->query("select * from watchlistitems w where w.Id = '$id'");

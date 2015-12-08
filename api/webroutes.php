@@ -19,10 +19,6 @@
         readfile('./webroot/analyze.html');
         die();
     };
-    $router->get['/home'] = function(){
-        readfile('./webroot/home.html');
-        die();
-    };
     $router->get['/settings'] = function(){
         readfile('./webroot/settings.html');
         die();

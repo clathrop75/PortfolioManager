@@ -9,12 +9,15 @@
 	<script src="./webroot/bootstrap/js/typeahead.bundle.js"></script>
 	<script src="https://code.highcharts.com/stock/highstock.js"></script>
 	<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+	<script src="./webroot/js/util.js"></script>
 	<script src="./webroot/js/CompanyController.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css" />
 	<link rel="stylesheet" type="text/css" href="./webroot/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="./webroot/css/custom.min.css">
 	<link rel="stylesheet" type="text/css" href="./webroot/bootstrap/css/typeahead-overrides.css">
 	<link rel="stylesheet" type="text/css" href="./webroot/css/company.css">
+	<link rel="stylesheet" type="text/css" href="./webroot/css/lastminute.css">
+	<link rel="shortcut icon" href="/favicon.ico?v=2"/>
 </head>
 
 <body>
@@ -31,18 +34,18 @@
 			<div class="collapse navbar-collapse" id="navbar-main">
 				<form class="navbar-form navbar-left" role="search">
 					<div id="prefetch" class="form-group">
-						<input id="textSymbol" type="text" class="form-control typeahead" placeholder="Research Companies">
+						<input id="textSymbol" type="text" class="form-control typeahead" placeholder="Research Companies" disabled>
 					</div>
-				</form>					
+				</form>
 				<ul class="nav navbar-nav">
 					<li><a href="./portfolio">Portfolio</a></li>
 					<li><a href="./transactions">Transactions</a></li>
 					<li><a href="./watchlists">Watch Lists</a></li>
 					<li><a href="./analyze">Analyze <span class="sr-only">(current)</span></a></li>
 				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="./login"><div id="currentUser"></div></a></li>
-					<li><a href="./home">Logout</a></li>
+				<ul class="nav navbar-nav navbar-right" id="navbarright">
+					<li id="ln"><a href="./login"><div id="currentUser">Login</div></a></li>
+					<li><a href="./logout">Logout</a></li>
 				</ul>
 			</div>
 		</div>

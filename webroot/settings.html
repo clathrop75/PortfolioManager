@@ -1,23 +1,67 @@
 <!DOCTYPE html>
 <head>
-	<meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="./webroot/css/settings.css" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script src="./webroot/js/settings.js"></script>
-    <title>User Settings</title>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+    <script src="./webroot/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./webroot/bootstrap/js/typeahead.bundle.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="./webroot/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./webroot/css/custom.min.css">
+    <link rel="stylesheet" type="text/css" href="./webroot/bootstrap/css/typeahead-overrides.css">
+    <link rel="stylesheet" type="text/css" href="./webroot/css/lastminute.css">
+    <script src="./webroot/js/util.js"></script>
+    <script src="./webroot/js/settings.js"></script>
+    <title>Edit User Information</title>
 </head>
 <body>
-
-User Settings<br>
-<div class='userinfo'></div>
-	 <form method="post" action="/usersettings" id='myForm'>
-  First Name: <input type="text" name="fname"><br>
-  Last Name: <input type="text" name="lname"><br>
-  Email Address: <input type="text" name="email"><br>
-  Password: <input type="password" name="oldpass" autofocus><br>
-  New Password: <input type="password" name="newpass" placeholder = 'Optional'><br>
-  <input type="submit" value="Update Info">
-</form> 
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Stock Manager</a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-main">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-main">
+            <form class="navbar-form navbar-left" role="search">
+                <div id="prefetch" class="form-group">
+                    <input id="textSymbol" type="text" class="form-control typeahead" placeholder="Research Companies" disabled>
+                </div>
+            </form>
+            <ul class="nav navbar-nav">
+                <li><a href="./portfolio">Portfolio</a></li>
+                <li><a href="./transactions">Transactions</a></li>
+                <li><a href="./watchlists">Watch Lists</a></li>
+                <li><a href="./analyze">Analyze <span class="sr-only">(current)</span></a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" id="navbarright">
+                <li id="ln"><a href="./login">
+                    <div id="currentUser">Login</div></a></li>
+                <li><a href="./logout">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container" id="content">
+    <div class="page-header" id="banner">
+        <div class="row text-center">
+            <h2>Sign Up</h2>
+        </div>
+    </div>
+    <div class='userinfo'></div>
+    <form method="post" action="/usersettings" id='myForm'>
+        First Name: <input type="text" name="fname" class="form-control"><br>
+        Last Name: <input type="text" name="lname" class="form-control"><br>
+        Email Address: <input type="text" name="email" class="form-control"><br>
+        Password: <input type="password" name="oldpass" autofocus class="form-control"><br>
+        New Password: <input type="password" name="newpass" placeholder = 'Optional' class="form-control"><br>
+        <input type="submit" value="Update Info">
+    </form>
+</div>
 </body>
-
 </html>
+<head>
+
