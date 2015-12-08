@@ -76,7 +76,7 @@ class transaction extends orm{
     protected function update()
     {
         $db = new db;
-        return $db->query("update transaction t set t.TransactionType='$this->transactionType', t.CompanyId = '$this->companyId', t.TransactionDate='$this->transactionDate', t.Shares ='$this->shares', t.Commission = '$this->commission', t.Notes = '$this->notes' where t.Id = '$this->id'");
+        return $db->query("update transaction t set t.CompanyId = '$this->companyId', t.TransactionType='$this->transactionType', t.TransactionDate='$this->transactionDate', t.Shares ='$this->shares', t.Price ='$this->price', t.Commission = '$this->commission', t.Notes = '$this->notes' where t.Id = '$this->id'");
     }
 
     public function getCompanyId()
