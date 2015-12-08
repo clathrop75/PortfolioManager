@@ -37,19 +37,20 @@
     $router->post['/watchlist'] = function() {
 
         $u = $GLOBALS['USER'];
-        $toUpdate = $_POST['watchlist'];
+        $toUpdate = $_POST['list'];
 
         $existing_watchlists = watchList::getByUserId($u->getId());
 
         foreach($existing_watchlists as $existing_watchlist) {
             if($existing_watchlist->getWatchListName() == $toUpdate){
                 $id = $existing_watchlist->getId();
-                $company = company::getBySymbol($_POST['toAdd']);
-                watchListItem::create($id,$company,'');
+                $company = company::getBySymbol($_POST['symbol']);
+                watchListItem::create($id,$company->getId(),'');
                 die();
             }
         }
-        watchList::create($u->getId(),$toUpdate);
+        $newlist = watchList::create($u->getId(),$toUpdate);
+        
         die();
     };
     $router->delete['/watchlist/#listid'] = function(){

@@ -69,63 +69,16 @@ $(document).ready(function () {
         });
 
     $("#add").on('click', function (e) {
-        //get values from fields
-        var newTransaction = {
-            symbol: $("[name='symbol']").val(),
-            type: $("#type").val(),
-            date: $("[name='date']").val(),
-            shares: $("[name='shares']").val(),
-            price: $("[name='price']").val(),
-            commission: $("[name='commission']").val(),
-            notes: $("[name='notes']").val()
-        };
-
         $.ajax("/watchlist",
             {
                 type: "POST",
                 datatype: "json",
                 data: {
-                    newlistitem: newlistitem
+                    symbol: $("[name='symbol']").val(),
+            		list: $("[name='list']").val()
                 },
                 success: function (result) {
-					var t = $("#transactions").DataTable();
-				 
-					var type = parseInt(result[0].type);
-					if (type == 1)
-						type = "Buy";
-					else
-						type = "Sell";
-					
-					var commission = result[0].commission;
-					if (commission == null || commission == 0)
-						commission = "";
-					else
-						commission = "$" + parseFloat(commission).toFixed(2);
-						
-					var notes = result[0].notes;
-					if (notes == null)
-						notes = "";
-					
-					t.row.add([
-						result[0].id,
-						"<a class='edit'>Edit</a>&nbsp; &nbsp; <a class='delete'>Del</a>",
-						result[0].companyName,
-						"<a href='/company?id=" + result[0].id + "'>" + result[0].symbol + "</a>",
-						type,
-						result[0].date,
-						parseFloat(result[0].shares).toFixed(2),
-						"$" + parseFloat(result[0].price).toFixed(2),
-						commission,
-						notes
-					]).draw(false);
-					
-					$("[name='symbol']").val(""),
-					$("#type").val(""),
-					$("[name='date']").val(""),
-					$("[name='shares']").val(""),
-					$("[name='price']").val(""),
-					$("[name='commission']").val(""),
-					$("[name='notes']").val("")
+                	location.reload(); 
                 }
             });
     });
@@ -186,7 +139,7 @@ function getWatchListData() {
 			for(var i = 0; i < results.length; i++) {
 				for(var j = 0; j < results[i].items.length; j++){
 					
-					html += "<td class='action'><input type='hidden'><a class='edit'>Edit</a>&nbsp; &nbsp; <a class='delete'>Del</a></td>";
+					html += "<td class='action'><input type='hidden'>&nbsp; &nbsp; <a class='delete'>Del</a></td>";
 					html += "<td class='watchlist'>" + results[i].name + "</td>";
 					html += "<td class='company'>" + results[i].items[j].companyName + "</td>";
 					html += "<td class='symbol'>" + results[i].items[j].symbol + "</td>";
